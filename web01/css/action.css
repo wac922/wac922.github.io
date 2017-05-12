@@ -478,6 +478,8 @@ footer {
 
   .template.order {
     font-size: 100%; }
+    .template.order section {
+      padding: 2em calc(50% - 50%); }
 
   footer {
     font-size: 0.5em; } }

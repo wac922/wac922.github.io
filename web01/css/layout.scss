@@ -544,6 +544,9 @@ footer{
   }
   .template.order{
     font-size: 100%;
+    section{
+      padding: 2em calc(50% - 50%);
+    }
   }
 
   footer{
