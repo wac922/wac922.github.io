@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            background-color: #ffa4cc;
+        }
+        #outer{
+            width: 200px;
+            height: 200px;
+            background-color: #4147ff;
+        }
+        .hamburger-menu{
+            background: none;
+            border: 1px solid red;
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            position: relative;
+        }
+        .icon-bar,.icon-bar:before,.icon-bar:after  {
+                                                         cursor: pointer;
+                                                         height: 4px;
+                                                         width: 30px;
+                                                         background-color: black;
+                                                         content: '';  //配合偽元素用
+                                                     position: absolute;
+                                                         /*top: 5%*/
+                                                     }
+
+        /*//將兩根偽元素的bar各自離目標元素上下個8px*/
+        .icon-bar:before{
+              top: -1px;
+          }
+        .icon-bar:after{
+            top: 1px;
+        }
+    </style>
+</head>
+<body>
+<div id="outer" onclick="divclick(event)">
+    <div id="div1"></div>
+</div>
+<button class="hamburger-menu">
+    <span class="icon-bar">12</span>
+  </button>
+
+<fieldset>
+    <legend>聯絡我們:</legend>
+    <div class="form-field">
+        <label for="name">Full name:</label>
+        <input name="name" id="name" />
+        <span class="error"></span>
+    </div>
+</fieldset>
+<script>
+    function divclick (event) {
+        event.stopPropagation();
+        console.log(event.target);
+        console.log(125);
+
+    }
+    var oDiv = document.getElementById('div1');
+    oDiv.addEventListener('click',divclick);
+
+    document.getElementsByClassName('hamburger-menu')[0].addEventListener('click',function () {
+        console.log('aaa');
+    })
+</script>
+</body>
+</html>
