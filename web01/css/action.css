@@ -122,6 +122,11 @@ h2 {
       position: absolute;
       top: 10px; }
 
+input {
+  height: 2rem;
+  margin-bottom: 1rem;
+  font-size: 1.2rem; }
+
 .order-control {
   margin: 1em auto; }
 
@@ -202,9 +207,11 @@ nav {
     position: absolute;
     bottom: 0px;
     left: 0px;
-    flex-direction: column; }
+    flex-direction: column;
+    box-shadow: 0px 10px 20px 0px #594846; }
     .banner .blur-banner p, .banner-home .blur-banner p {
-      margin: 8px auto; }
+      margin: 8px auto;
+      text-align: center; }
       .banner .blur-banner p:first-child, .banner-home .blur-banner p:first-child {
         margin-top: 50px; }
 
@@ -219,12 +226,12 @@ nav {
 */
 .template {
   margin-top: 80px;
-  min-height: 700px;
+  min-height: calc(100vh - 80px);
   position: relative; }
 
 section {
   width: 100%;
-  min-height: 700px;
+  min-height: calc(100vh - 80px);
   box-sizing: border-box;
   position: relative; }
   section .card-list {
@@ -267,13 +274,14 @@ section::before {
 
 .card {
   -moz-perspective: 1000px;
-  -webkit-perspective: 1000px;
-  perspective: 1000px; }
+  -webkit-perspective: 1000px; }
   .card .front-flip {
     -webkit-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
     transform: rotateY(180deg); }
   .card .back-flip {
     -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
     transform: rotateY(0deg); }
 
 .flipper {
@@ -292,19 +300,23 @@ section::before {
   left: 0;
   top: 0;
   -webkit-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
   backface-visibility: hidden;
   -webkit-transition: 0.6s;
   transition: 0.6s;
   display: flex;
+  display: -ms-flex;
   flex-direction: column; }
 
 .front {
   z-index: 1;
   -webkit-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
   transform: rotateY(0deg); }
 
 .back {
   -webkit-transform: rotateY(-180deg);
+  -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg); }
   .back p {
     margin: auto;
@@ -316,8 +328,10 @@ section::before {
 .template.about .container {
   position: relative; }
   .template.about .container:nth-child(1) {
+    -ms-flex: 1 1 auto;
     flex: 1 1 auto; }
   .template.about .container:nth-child(2) {
+    -ms-flex: 3 1 auto;
     flex: 3 1 auto; }
 .template.about .container::before {
   content: '';
@@ -366,10 +380,9 @@ section::before {
     .box fieldset span {
       margin-left: 5%; }
     .box fieldset .form-field {
-      margin: 15px auto 0px 5%;
+      margin: 5px auto 0px 5%;
       position: relative; }
       .box fieldset .form-field input, .box fieldset .form-field textarea {
-        position: absolute;
         left: 6em; }
     .box fieldset .btn {
       margin-left: 50px;
@@ -384,6 +397,11 @@ section::before {
   background-clip: content-box; }
   .template.order section #order-form {
     padding: 3em calc(50% - 45%); }
+  .template.order section select {
+    height: 2rem; }
+  .template.order section #amount-payable {
+    color: red;
+    font-size: 2rem; }
 
 .form-field.act {
   border-bottom: 1px solid #846930; }
@@ -394,7 +412,7 @@ footer {
   text-align: center;
   padding: 5px;
   box-sizing: border-box;
-  box-shadow: 0px 3px 5px 3px #594846; }
+  box-shadow: -1px -3px 20px 0px #594846; }
 
 @media screen and (max-width: 670px) {
   body {
@@ -458,6 +476,9 @@ footer {
     .template.about .wrapper p {
       font-size: 1.6em; }
 
+  .template.order {
+    font-size: 100%; }
+
   footer {
     font-size: 0.5em; } }
 @media screen and (max-width: 330px) {
@@ -466,11 +487,14 @@ footer {
 @media screen and (min-width: 671px) {
   .card:hover .front, .front-flip {
     -webkit-transform: rotateY(180deg);
+    -ms-transform: rotateY(180deg);
     transform: rotateY(180deg); }
 
   .card:hover .back, .back-flip {
     -webkit-transform: rotateY(0deg);
-    transform: rotateY(0deg); } }
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    z-index: 1\0; } }
 body {
   color: #846932; }
 

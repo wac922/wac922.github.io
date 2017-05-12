@@ -1,5 +1,6 @@
 .card:hover .front,.front-flip{
   -webkit-transform: rotateY(180deg);
+  -ms-transform: rotateY(180deg);
   transform: rotateY(180deg);
 }
 //.front-flip{
@@ -7,5 +8,7 @@
 //}
 .card:hover .back,.back-flip{
   -webkit-transform: rotateY(0deg);
+  -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
+  z-index: 1\0;
 }
