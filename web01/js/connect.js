@@ -89,6 +89,46 @@ $('#order-form input:reset').click(function () {//重置鍵，移除所有訂購
 });
 
 
+//get products
+var $tbody = $('tbody');
+$.getJSON('products-table.json',function (data) {
+    console.dir(data);
+    $.each(data,function (key,value) {
+        $('.tr-products.tr-origin')
+            .clone()
+            .removeClass('tr-origin hidden')
+            .find('td')
+            .each(function (index, elem) {
+                // console.log(elem.dataset.td);
+                switch (elem.dataset.td){
+                    case 'name':
+                        elem.innerHTML = value['name'];
+                        var image = document.createElement('img');
+                        var imgDiv = document.createElement('div');
+                        image.setAttribute('src','img/'+value['image']+'.jpg');
+                        imgDiv.appendChild(image);
+
+                        this.appendChild(imgDiv);
+                        break;
+                    case 'description':
+                        elem.innerHTML = value['description'];
+                        break;
+                    case 'made-from':
+                        elem.innerHTML = value['made-from'];
+                        break;
+                    case 'price':
+                        elem.innerHTML = value['price'];
+                        break;
+                    default:
+                        console.log('fail');
+                }
+                // console.log('complete loop');
+            })
+            .end()
+            .appendTo($tbody);
+    });
+});
+
 
 // function executeAjax(url,func,myTarget,context) {
 //     var oAjax = new XMLHttpRequest();
