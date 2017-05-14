@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-sacle=1">
     <title>TanFen</title>
     <link rel="stylesheet" href="css/action.css">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon-01.png" type="image/png">
     <!--<link rel="stylesheet" href="css/layout.css">-->
     <style>
         /*layout-css */
@@ -42,7 +42,8 @@
         <p class="banner-info">自然&nbsp;‧&nbsp;安心&nbsp;‧&nbsp;美味</p>
         <div class="blur-banner flex">
             <p>雞蛋、麵粉、糖</p>
-            <p>用最純樸的材料&nbsp;&nbsp;&nbsp;呈現原始的美味</p>
+            <!--<p>用最純樸的材料&nbsp;&nbsp;&nbsp;呈現原始的美味</p>-->
+            <p><span>用最純樸的材料</span><span>呈現原始的美味</span></p>
         </div>
     </div>
     <section>
@@ -200,20 +201,22 @@
 </div>
 <!--template products start-->
 <div class="template products hidden">
-    <section class="flex flex-row-cen">
-        <table>
+    <section class="flex">
+        <table class="rwd-table products-table">
             <thead>
                 <tr>
                     <th>品名</th>
                     <th>商品描述</th>
+                    <th>成分</th>
                     <th>價格</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td class="td-products td-goods-name"></td>
-                    <td class="td-products td-goods-description"></td>
-                    <td class="td-products td-goods-price"></td>
+                <tr class="tr-products tr-origin hidden">
+                    <td data-td="name" data-cn="品名" width="30%"></td>
+                    <td data-td="description" data-cn="商品描述" width="30%"></td>
+                    <td data-td="made-from" data-cn="成分" width="30%"></td>
+                    <td data-td="price" data-cn="價格" width="10%"></td>
                 </tr>
             </tbody>
         </table>
