@@ -128,7 +128,8 @@ button {
   background-color: #594846;
   color: #ffffff;
   border: none;
-  cursor: pointer; }
+  cursor: pointer;
+  font-size: large; }
 
 .order-control {
   margin: 1em auto; }
