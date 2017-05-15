@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="淡粉棠,tanfen,bakery,bread,cake,烘焙,麵包,西點,餅乾,蛋糕,安心">
+    <meta name="viewport" content="width=device-width, initial-sacle=1">
+    <title>TanFen</title>
+    <link rel="stylesheet" href="css/action.css">
+    <link rel="icon" href="img/favicon-01.png" type="image/png">
+    <!--<link rel="stylesheet" href="css/layout.css">-->
+    <style>
+        /*layout-css */
+
+    </style>
+</head>
+<body>
+<nav>  <!--100%-->
+    <div class="wrapper flex"> <!--wrapper 1100px-->
+        <a href="javascript:;" class="nav-btn logo flex" data-marks="home-page">
+            <img src="img/logo2.png" alt="">
+            <h1>烘焙坊</h1>
+        </a>
+        <div id="cart-container">
+            <span>購物車</span>
+            <div id="cart">0</div>
+            <button id="clear-cart">清空購物車</button>
+        </div>
+        <div id="menu-block">
+            <a href="javascript:;" id="menu-toggle">
+                <button class="hamburger-menu">
+                    <span class="icon-bar"></span>
+                </button>
+            </a>
+            <ul class="nav-list flex">
+                <li class="nav-btn" data-marks="news"></li>
+                <li class="nav-btn" data-marks="about"></li>
+                <li class="nav-btn" data-marks="products"></li>
+                <li class="nav-btn" data-marks="order"></li>
+                <li class="nav-btn" data-marks="contact"></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!--template home-page start-->
+<div class="template home-page">
+    <div class="banner-home flex">
+        <p class="banner-info">自然&nbsp;‧&nbsp;安心&nbsp;‧&nbsp;美味</p>
+        <div class="blur-banner flex">
+            <p>雞蛋、麵粉、糖</p>
+            <!--<p>用最純樸的材料&nbsp;&nbsp;&nbsp;呈現原始的美味</p>-->
+            <p><span>用最純樸的材料</span><span>呈現原始的美味</span></p>
+        </div>
+    </div>
+    <section>
+        <ul class="card-list  wrapper">
+            <li class="card">
+                <div class="flipper">
+                    <div class="front">
+                        <img src="img/sweet-potato.jpg" alt="">
+                        <h2>紫心番薯麵包</h2>
+                    </div>
+                    <div class="back">
+                        <h2>紫心番薯麵包</h2>
+                        <p>添加了日本紫心地瓜做成的麵團，包覆甜蜜鬆軟的竹山紅心地瓜餡，
+                            外層再裹上稍微苦甘的純可可粉，讓外觀激似烤番薯的麵包，既好吃又好玩!</p>
+                    </div>
+                </div>
+            </li>
+            <li class="card">
+                <div class="flipper">
+                    <div class="front">
+                        <img src="img/denmark.jpg" alt="">
+                        <h2>葡萄丹麥捲</h2>
+                    </div>
+                    <div class="back">
+                        <h2>葡萄丹麥捲</h2>
+                        <p>添加了日本紫心地瓜做成的麵團，包覆甜蜜鬆軟的竹山紅心地瓜餡，
+                            外層再裹上稍微苦甘的純可可粉，讓外觀激似烤番薯的麵包，既好吃又好玩!</p>
+                    </div>
+                </div>
+            </li>
+            <li class="card">
+                <div class="flipper">
+                    <div class="front">
+                        <img src="img/nama-cheesecake.jpg" alt="">
+                        <h2>檸檬生乳酪蛋糕</h2>
+                    </div>
+                    <div class="back">
+                        <h2>檸檬生乳酪蛋糕</h2>
+                        <p>添加了日本紫心地瓜做成的麵團，包覆甜蜜鬆軟的竹山紅心地瓜餡，
+                            外層再裹上稍微苦甘的純可可粉，讓外觀激似烤番薯的麵包，既好吃又好玩!</p>
+                    </div>
+                </div>
+            </li>
+            <li class="card">
+                <div class="flipper">
+                    <div class="front">
+                        <img src="img/America-cookies2.jpg" alt="">
+                        <h2>美式曲奇</h2>
+                    </div>
+                    <div class="back">
+                        <h2>美式曲奇</h2>
+                        <p>添加了日本紫心地瓜做成的麵團，包覆甜蜜鬆軟的竹山紅心地瓜餡，
+                            外層再裹上稍微苦甘的純可可粉，讓外觀激似烤番薯的麵包，既好吃又好玩!</p>
+                    </div>
+                </div>
+            </li>
+            <li class="card">
+                <div class="flipper">
+                    <div class="front">
+                        <img src="img/hala.jpg" alt="">
+                        <h2>猶太辮子麵包</h2>
+                    </div>
+                    <div class="back">
+                        <h2>猶太辮子麵包</h2>
+                        <p>添加了日本紫心地瓜做成的麵團，包覆甜蜜鬆軟的竹山紅心地瓜餡，
+                            外層再裹上稍微苦甘的純可可粉，讓外觀激似烤番薯的麵包，既好吃又好玩!</p>
+                    </div>
+                </div>
+            </li>
+            <li class="card">
+                <div class="flipper">
+                    <div class="front">
+                        <img src="img/mooncake.jpg" alt="">
+                        <h2>抹茶紅豆廣式月餅 </h2>
+                    </div>
+                    <div class="back">
+                        <h2>抹茶紅豆廣式月餅 </h2>
+                        <p>添加了日本紫心地瓜做成的麵團，包覆甜蜜鬆軟的竹山紅心地瓜餡，
+                            外層再裹上稍微苦甘的純可可粉，讓外觀激似烤番薯的麵包，既好吃又好玩!</p>
+                    </div>
+                </div>
+            </li>
+
+        </ul>
+    </section>
+</div>
+<!--template home-page end-->
+<!--template news start-->
+<div class="template news hidden">
+    <section>
+        <img src="img/construction-site-153692.svg" alt="">
+    </section>
+</div>
+<!--template about start-->
+<div class="template about hidden">
+    <section class="flex flex-row-cen">
+        <div class="wrapper flex">
+            <div class="container">
+                <img class="" src="img/about.jpg" alt="">
+            </div>
+            <div class="container">
+                <div>
+                    <p>
+                        我在翠綠的稻田中　凝視遠方　落下的太陽<br/>
+                        妳在蔚藍的天空下　抬頭看著　飄來的雲裳<br/>
+                        音樂在我耳中迴盪　影子在我身後拉長<br/>
+                        疑惑在妳心中滋長　絕望在妳的心裡擴張
+                    </p>
+                    <p>
+                        我在前　妳在後　妳在聽　我在說<br/>
+                        我不走　妳不動　妳不說　我不懂<br/>
+                        於是　妳從不輕易告訴我　妳在想<br/>
+                        為何我總是　看著遠方
+                    </p>
+                    <p>
+                        我在前　妳在後　妳在聽　我在說<br/>
+                        我不走　妳不動　妳不說　我不懂<br/>
+                        於是　妳從不直接告訴我<br/>
+                        妳知道　會有那麼一天
+                    </p>
+                    <p>
+                        我在屬於我的王國　企圖打造一座天堂<br/>
+                        妳在屬於妳的城堡　開始堆砌　高大的城牆<br/>
+                        音樂曾是彼此橋樑　淚水在旋律中蕩漾<br/>
+                        更多更詳盡歌詞 在 ※ Mojim.com　魔鏡歌詞網<br/>
+                        畫面竟然超出想像　絕望在我的心裡擴張
+                    </p>
+                    <p>
+                        我在前　妳在後　妳在聽　我在說<br/>
+                        我不走　妳不動　妳不說　我不懂<br/>
+                        於是　妳從不輕易告訴我　妳在想<br/>
+                        為何我總是　看著遠方
+                    </p>
+                    <p>
+                        我在前　妳在後　妳在聽　我在說<br/>
+                        我不走　妳不動　妳不說　我不懂<br/>
+                        於是　妳從不直接告訴我<br/>
+                        妳知道　會有那麼一天　轉身走向遠方
+                    </p>
+                    <p>
+                        於是　藍天褪去白雲裳<br/>
+                        於是　黑夜籠罩在我身上
+                    </p>
+                    <p>
+                        而我仍在翠綠的稻田中　凝視著遠方落下來的太陽<br/>
+                        這一切　關於我們　關於不說　關於等待　關於守候<br/>
+                        於是我們　不再開口<br/>
+                        而我仍在翠綠的稻田中　凝視著遠方落下的太陽
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+</div>
+<!--template products start-->
+<div class="template products hidden">
+    <section class="flex">
+        <table class="rwd-table products-table">
+            <thead>
+            <tr>
+                <th>品名</th>
+                <th>商品描述</th>
+                <th>成分</th>
+                <th>價格</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr class="tr-products tr-origin hidden">
+                <td data-td="name" data-cn="品名" width="30%"></td>
+                <td data-td="description" data-cn="商品描述" width="30%"></td>
+                <td data-td="made-from" data-cn="成分" width="30%"></td>
+                <td data-td="price" data-cn="價格" width="10%"></td>
+                <td>
+                    <button class="into-cart">加入購買清單</button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </section>
+</div>
+<!--template order start-->
+<div class="template order hidden">
+    <section>
+        <form action="order.php" id="order-form" name="order-form" method="post">
+            <div class="form-field">
+                <label for="name">姓名:</label>
+                <input name="name" id="name" required/>
+                <span class="error"></span>
+            </div>
+            <div class="form-field">
+                <label for="tele">電話:</label>
+                <input name="tele" id="tele" required/>
+                <span class="error"></span>
+            </div>
+            <div class="form-field">
+                <label for="addr">配送地址:</label>
+                <input name="addr" id="addr" required/>
+                <span class="error"></span>
+            </div>
+            <div class="form-field">
+                <label for="order-date">配送日期:</label>
+                <input type="date" name="order-date" id="order-date" required/>
+                <span class="error"></span>
+            </div>
+            <div class="order-control">
+                <div class="form-field hidden">
+                    <input type="button" class="field-remover" value="X">
+                    <label for="goods-chooser-control">品名:</label>
+                    <select name="goods" id="goods-chooser-control" class="goods-chooser-control">
+                    </select><br/>
+                    <label for="unit-price">單價:新台幣</label>
+                    <span id="unit-price" class="unit-price">0</span>
+                    <span>元</span>
+                    <label for="quantity">數量:</label>
+                    <input type="number" name="quantity" id="quantity" class="quantity" min="0">
+                    <span>小計:
+                        <span class="subtotal">0</span>
+                        元
+                    </span>
+                </div>
+            </div>
+            <button id="add-goods">+</button>
+            <br/>
+            <div class="form-field">總計: <span id="total"></span></div>
+            <div class="form-field">運費: <span id="freight-expense">0</span><span>元，滿兩千元(含)免運費</span></div>
+            <div class="form-field">應付金額: <span id="amount-payable">0</span><span>元</span></div>
+            <input type="submit" value="送出訂單">
+            <input type="reset" value="重置">
+        </form>
+    </section>
+</div>
+<!--template contact start-->
+<div class="template contact hidden">
+    <section class="flex">
+        <form action="contact.php" id="contact-form" name="contact-form" method="post" class="wrapper box">
+            <fieldset>
+                <legend>聯絡我們:</legend>
+                <span>有任何問題，歡迎留言與我們聯繫喔!</span>
+                <div class="form-field">
+                    <label for="nickName">暱稱:</label>
+                    <input name="nickName" id="nickName"/>
+                    <span class="error"></span>
+                </div>
+                <div class="form-field">
+                    <label for="mail">e-mail:</label>
+                    <input type="email" name="mail" id="mail" required/>
+                    <span class="error"></span>
+                </div>
+                <div class="form-field">
+                    <label for="subject">主旨:</label>
+                    <input name="subject" id="subject"/>
+                    <span class="error"></span>
+                </div>
+                <div class="form-field">
+                    <label for="message">留言:</label>
+                    <textarea name="message" id="message"></textarea>
+                    <span class="error"></span>
+                </div>
+                <input class="btn" type="submit" value="送出"/>
+                <input class="btn" type="reset" value="重寫"/>
+            </fieldset>
+        </form>
+    </section>
+</div>
+<footer>
+    <p>&copy; 2017 TanFen Bakery Co., LTD All Right Reserved.</p>
+</footer>
+<!--==============================================================================-->
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/connect.js"></script>
+<script>
+    //    function debounce(func,wait,immediate) {
+    //        var timeout;
+    //
+    //        return function(){
+    //            clearTimeout(timeout);//每次觸發前，先清除定時器
+    //            timeout=setTimeout(func,wait);
+    //        }
+    //    }
+    //    function realfunc() {
+    //        var scrollTop = $(this).scrollTop();
+    //
+    //        $('nav').addClass('scroll-float').css('top',scrollTop);
+    //        console.log(scrollTop);
+    //        if(scrollTop ==0){
+    //            $('nav').removeClass('scroll-float');
+    //        }
+    //    }
+    //
+    //    $(document).scroll(debounce(realfunc,0));
+    //    $(document).scroll(function () {
+    //        var scrollTop = $(this).scrollTop();
+    //
+    //            $('nav').addClass('scroll-float').css('top',scrollTop);
+    //            console.log(scrollTop);
+    //        if(scrollTop ==0){
+    //            $('nav').removeClass('scroll-float');
+    //        }
+    //    })
+    function hiddenMenu() {
+        var navList = document.getElementsByClassName('nav-list')[0];
+        if (navList.classList.contains('display-toggle')) {
+            navList.classList.remove('display-toggle');
+        }
+    }
+    function changeBlock() {
+        var marks = $(this).data('marks');
+        var $this = $(this);
+
+
+        $('.template').addClass('hidden');//先隱藏所有區塊
+        $('.' + marks).removeClass('hidden');//移除需要顯示的hidden類名
+        $(window).scrollTop(0);//回每頁頂部
+//    console.log($(this).css('background-position'));
+//    console.log($(this).index());
+        var hoverColor = $this.css('background-position');
+        //將所有按鈕顏色恢復
+        $navlistBtn.each(function () {
+            $(this).css('background-position', "");
+        });
+//    console.log(hoverColor);
+        $this.css('background-position', hoverColor);
+
+        $resetbtn.click();
+        /*若點擊的是填寫訂單頁面，檢查cart*/
+        if ($this.data('marks') === 'order') {
+            for (var i = 0; i < cart.length; i++) {
+                cloneOrder()
+                    .find('select')
+                    .val(cart[i])
+                    .change()
+                    .end()
+                    .insertAfter($orderControl.children('.form-field.hidden'));
+
+            }
+        }
+    }
+    //更改網址
+    //        history.pushState(null,null,originHref+'?p='+marks);
+    //        var originHref = window.location.href;
+    //    console.log(document.cookie);
+
+    //    switch (location.search) {
+    //        case 'p=news':
+    //            $navBtn.filter(function () {
+    //                return $(this).data('marks') == location.search;
+    //            }).click();
+    //    }
+
+    $(document).scroll(function () {
+        var scrollTop = $(this).scrollTop();
+        $('nav').addClass('scroll-float');
+        if (scrollTop == 0) {
+            $('nav').removeClass('scroll-float');
+        }
+    });
+
+    //=====nav link
+    var $navBtn = $('.nav-btn');
+    var $navlistBtn = $('.nav-list .nav-btn');
+
+    $navBtn.on('click', changeBlock);
+    //=====nav link end
+    //=====menu-toggle
+    var hamburgerMenu = document.getElementsByClassName('hamburger-menu')[0];
+
+    hamburgerMenu.addEventListener('click', function (event) {
+        var navList = document.getElementsByClassName('nav-list')[0];
+        navList.classList.toggle('display-toggle');
+    });
+    window.addEventListener('resize', function () {
+        if (window.innerWidth > 670) {
+//            console.log(window.innerWidth);
+            return hiddenMenu();
+        }
+    });
+    //點擊其他區域，隱藏選單
+    document.addEventListener('click', function (event) {
+//        console.log(event.target);
+        if (event.target.className !== 'hamburger-menu') {
+            return hiddenMenu();
+        }
+    });
+    function aCardTouchStart() {
+//            event.preventDefault();
+        var tempValue = document.documentElement.scrollTop || document.body.scrollTop;
+        console.log(tempValue);
+        scrollValue = tempValue;
+    }
+    //==================================================card-flip
+    function aCardTouchEnd(event) {
+        event.preventDefault();
+        alert(event.target);
+        var tempValue = document.documentElement.scrollTop || document.body.scrollTop;
+        console.log(tempValue);
+        if (scrollValue == tempValue) {
+            var front = this.getElementsByClassName('front')[0];
+            var back = this.getElementsByClassName('back')[0];
+            front.classList.toggle('front-flip');
+            back.classList.toggle('back-flip');
+        }
+    }
+
+    function aCardClick(event) {
+        event.preventDefault();
+        console.log(event.target.className);
+        var front = this.getElementsByClassName('front')[0];
+        var back = this.getElementsByClassName('back')[0];
+//            console.log(front);
+        front.classList.toggle('front-flip');
+        back.classList.toggle('back-flip');
+    }
+    var aCard = document.getElementsByClassName('card');
+
+    var scrollValue = 0;
+    for (var i = 0; i < aCard.length; i++) {
+        aCard[i].addEventListener('touchstart', aCardTouchStart);
+//      aCard[i].addEventListener('touchend',aCardTouchEnd);
+        aCard[i].addEventListener('click', aCardClick);
+
+    }
+
+    //訂單連動
+    /*產品介紹頁面，點擊"加入購買清單"，
+     將該品項存在陣列(購物車)裡,
+     重複點擊==>檢查購物車有無相同資料，(不重複儲存)
+     待點擊"填寫訂單"時，
+     檢查購物車所有儲存的資料，
+     在填寫訂單頁面自動新增一條相應訂購欄*/
+    var cart = [];
+    $('table.rwd-table').on('click', 'button', function (event) {
+        var $this = $(this);
+        var temp = null;
+        var alt = $this.closest('tr').find('td:first-child img').attr('alt');
+//        console.log(alt);
+        for (var i = 0; i < cart.length; i++) {
+            if (cart[i] !== alt) {
+                temp = alt;
+            } else {
+                temp = null;
+                break;
+            }
+        }
+        if (cart.length === 0) {
+            cart.push(alt);
+        } else if (temp) {
+            cart.push(temp);
+        }
+        $('#cart').text(cart.length);
+    });
+//    setInterval(function () {
+//        console.log(cart);
+//    }, 2000)
+
+    $('#clear-cart').click(function () {
+        cart.length=0;
+        $('#cart').text(cart.length);//購物車計數器歸零
+        $resetbtn.click();//重置訂單
+    });
+</script>
+</body>
+</html>

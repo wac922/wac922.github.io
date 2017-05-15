@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-sacle=1">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .outer{
+            perspective: 1000px;
+            transform-style: preserve-3d;
+        }
+        .outer:hover .front{
+            transform: rotateY(180deg);
+        }
+        .outer:hover .back{
+            transform: rotateY(0deg);
+        }
+        .outer,.front,.back{
+            width: 200px;
+            height: 300px;
+            /*border: 2px solid black;*/
+            /*text-align: center;*/
+        }
+        .inner{
+            transition: 0.6s;
+            transform-style: preserve-3d;
+            position: relative;
+            /*border: 1px solid red;*/
+        }
+        .front,.back{
+            backface-visibility: hidden;
+            transition: 0.6s;
+            transform-style: preserve-3d;
+            position: absolute;
+            left: 0;
+            top:0;
+        }
+        /*.outer:hover .inner{*/
+            /*transform: rotateY(180deg);*/
+
+        /*}*/
+        .front{
+            background-color: aqua;
+            z-index: 2;
+            transform: rotateY(0deg);
+        }
+        .back{
+            background-color: #594846;
+            transform: rotateY(-180deg);
+        }
+        body{
+            height: 2000px;
+        }
+        *{
+            margin: 0;
+            padding:0;
+        }
+        #header{
+            width: 100%;
+            height:50px;
+            background-color: blueviolet;
+            position: absolute;
+            top:0;
+            z-index: 2;
+        }
+        #p1{
+            /*width: 200px;*/
+            /*height: 200px;*/
+            position: relative;
+            background-color: #ffa4cc;
+            content: '';
+        }
+        #p1:before{
+            position: absolute;
+            top:0;left: 0;bottom: 0;
+            right:0;
+            background-color: #4147ff;
+        }
+    </style>
+</head>
+<body>
+<!--<div id="header">123</div>-->
+<div class="outer">
+    <div class="inner">
+        <div class="front">
+            正面
+        </div>
+        <div class="back">
+            背面
+        </div>
+    </div>
+</div>
+
+<ul class="level-1">
+    <li class="item-i">I</li>
+    <li class="item-ii">II
+        <ul class="level-2">
+            <li class="item-a">A</li>
+            <li class="item-b">B
+                <ul class="level-3">
+                    <li class="item-1">1</li>
+                    <li class="item-2">2</li>
+                    <li class="item-3">3</li>
+                </ul>
+            </li>
+            <li class="item-c">C</li>
+        </ul>
+    </li>
+    <li class="item-iii">III</li>
+</ul>
+<div class="oDiv" style="background-color: blueviolet">aaa
+
+<a href="https://tw.yahoo.com/" target="_blank">aaaaa</a>
+</div>
+<input type="text" id="abc" value="tom">
+<button id="btn">click me</button>
+<p id="p1"></p>
+
+
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    $( "ul.level-2" ).children().css( "background-color", "red" ).css('margin-top','10px');
+    var ticking = false;
+function onscroll() {
+    if (!ticking){
+        requestAnimationFrame(realFunc);
+        ticking = true;
+    }
+}
+function realFunc() {
+    console.log('Success');
+    ticking = false;
+    var scrollTop = $(window).scrollTop();
+    $('#header').css('top',scrollTop);
+}
+
+window.addEventListener('scroll',onscroll,false);
+
+$('.oDiv').on('click','a',function () {
+    console.log('div11111');
+})
+
+
+
+var btn = document.getElementById('btn');
+var p1 = document.getElementById('p1');
+
+btn.addEventListener('click',function () {
+var oInput = document.getElementById('abc');
+    console.log(oInput.value);
+//    oInput.value = '123';
+    p1.innerText = oInput.value;
+})
+alert(window.innerWidth);
+</script>
+</body>
+</html>
