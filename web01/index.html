@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="keywords" content="bakery,bread,cake,烘焙,麵包,西點,餅乾,蛋糕,安心">
+    <meta name="keywords" content="淡粉棠,tanfen,bakery,bread,cake,烘焙,麵包,西點,餅乾,蛋糕,安心">
     <meta name="viewport" content="width=device-width, initial-sacle=1">
     <title>TanFen</title>
     <link rel="stylesheet" href="css/action.css">
@@ -20,6 +20,11 @@
             <img src="img/logo2.png" alt="">
             <h1>烘焙坊</h1>
         </a>
+        <div id="cart-container">
+            <span>購物車</span>
+            <div id="cart">0</div>
+            <button id="clear-cart">清空購物車</button>
+        </div>
         <div id="menu-block">
             <a href="javascript:;" id="menu-toggle">
                 <button class="hamburger-menu">
@@ -134,7 +139,7 @@
 <!--template news start-->
 <div class="template news hidden">
     <section>
-
+        <img src="img/construction-site-153692.svg" alt="">
     </section>
 </div>
 <!--template about start-->
@@ -204,20 +209,23 @@
     <section class="flex">
         <table class="rwd-table products-table">
             <thead>
-                <tr>
-                    <th>品名</th>
-                    <th>商品描述</th>
-                    <th>成分</th>
-                    <th>價格</th>
-                </tr>
+            <tr>
+                <th>品名</th>
+                <th>商品描述</th>
+                <th>成分</th>
+                <th>價格</th>
+            </tr>
             </thead>
             <tbody>
-                <tr class="tr-products tr-origin hidden">
-                    <td data-td="name" data-cn="品名" width="30%"></td>
-                    <td data-td="description" data-cn="商品描述" width="30%"></td>
-                    <td data-td="made-from" data-cn="成分" width="30%"></td>
-                    <td data-td="price" data-cn="價格" width="10%"></td>
-                </tr>
+            <tr class="tr-products tr-origin hidden">
+                <td data-td="name" data-cn="品名" width="30%"></td>
+                <td data-td="description" data-cn="商品描述" width="30%"></td>
+                <td data-td="made-from" data-cn="成分" width="30%"></td>
+                <td data-td="price" data-cn="價格" width="10%"></td>
+                <td>
+                    <button class="into-cart">加入購買清單</button>
+                </td>
+            </tr>
             </tbody>
         </table>
     </section>
@@ -349,6 +357,7 @@
     }
     function changeBlock() {
         var marks = $(this).data('marks');
+        var $this = $(this);
 
 
         $('.template').addClass('hidden');//先隱藏所有區塊
@@ -356,26 +365,39 @@
         $(window).scrollTop(0);//回每頁頂部
 //    console.log($(this).css('background-position'));
 //    console.log($(this).index());
-        var hoverColor = $(this).css('background-position');
+        var hoverColor = $this.css('background-position');
         //將所有按鈕顏色恢復
         $navlistBtn.each(function () {
             $(this).css('background-position', "");
         });
 //    console.log(hoverColor);
-        $(this).css('background-position', hoverColor);
+        $this.css('background-position', hoverColor);
 
-//更改網址
-//        history.pushState(null,null,originHref+'?p='+marks);
-    }
-//        var originHref = window.location.href;
-//    console.log(document.cookie);
+        $resetbtn.click();
+        /*若點擊的是填寫訂單頁面，檢查cart*/
+        if ($this.data('marks') === 'order') {
+            for (var i = 0; i < cart.length; i++) {
+                cloneOrder()
+                    .find('select')
+                    .val(cart[i])
+                    .change()
+                    .end()
+                    .insertAfter($orderControl.children('.form-field.hidden'));
 
-    switch (location.search){
-        case 'p=news':
-            $navBtn.filter(function () {
-             return  $(this).data('marks') == location.search;
-            }).click();
+            }
+        }
     }
+    //更改網址
+    //        history.pushState(null,null,originHref+'?p='+marks);
+    //        var originHref = window.location.href;
+    //    console.log(document.cookie);
+
+    //    switch (location.search) {
+    //        case 'p=news':
+    //            $navBtn.filter(function () {
+    //                return $(this).data('marks') == location.search;
+    //            }).click();
+    //    }
 
     $(document).scroll(function () {
         var scrollTop = $(this).scrollTop();
@@ -449,6 +471,44 @@
         aCard[i].addEventListener('click', aCardClick);
 
     }
+
+    //訂單連動
+    /*產品介紹頁面，點擊"加入購買清單"，
+     將該品項存在陣列(購物車)裡,
+     重複點擊==>檢查購物車有無相同資料，(不重複儲存)
+     待點擊"填寫訂單"時，
+     檢查購物車所有儲存的資料，
+     在填寫訂單頁面自動新增一條相應訂購欄*/
+    var cart = [];
+    $('table.rwd-table').on('click', 'button', function (event) {
+        var $this = $(this);
+        var temp = null;
+        var alt = $this.closest('tr').find('td:first-child img').attr('alt');
+//        console.log(alt);
+        for (var i = 0; i < cart.length; i++) {
+            if (cart[i] !== alt) {
+                temp = alt;
+            } else {
+                temp = null;
+                break;
+            }
+        }
+        if (cart.length === 0) {
+            cart.push(alt);
+        } else if (temp) {
+            cart.push(temp);
+        }
+        $('#cart').text(cart.length);
+    });
+//    setInterval(function () {
+//        console.log(cart);
+//    }, 2000)
+
+    $('#clear-cart').click(function () {
+        cart.length=0;
+        $('#cart').text(cart.length);//購物車計數器歸零
+        $resetbtn.click();//重置訂單
+    });
 </script>
 </body>
 </html>

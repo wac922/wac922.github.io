@@ -5,7 +5,7 @@ var $orderControl = $('.order-control');//所有訂購欄之容器
 var $goodsSelected = $('.goods-chooser-control');//品名下拉選單
 var $setUnitPrice = $('.unit-price');//單價欄位
 var $total =  $('#total'); //總計欄位
-
+var $resetbtn =$('#order-form input:reset');
 
 function loadFinish() {//品名讀入後新增一個空白訂購欄
     $('#add-goods').click();
@@ -53,14 +53,17 @@ function countTotalPrice() {//計算應付金額
     amountPayableSpan.text(countAmountPayable);
     // }
 }
-
-$('#add-goods').click(function (event) {//新增訂購欄位
-    event.preventDefault();
-    $orderControl
+function cloneOrder() {//複製訂購欄位
+   return $orderControl
         .find('div.form-field.hidden')
         .clone(true)
         .removeClass('hidden')
-        .addClass('act')
+        .addClass('act');
+}
+
+$('#add-goods').click(function (event) {//新增訂購欄位
+    event.preventDefault();
+    cloneOrder()
         .appendTo($orderControl);
 });
 
@@ -79,11 +82,18 @@ $orderControl.on('click','.field-remover',removeOrder);//清除該欄位
 $('#quantity').change(countSubtotal);//數量變化即時計算小計額
 
 $goodsSelected.change(function () {//品名變化清空之前的數量及小計
-    $(this).closest('.form-field').find('.quantity').val(0).focus().end().find('span.subtotal').text(0);
+    $(this).closest('.form-field')
+        .find('.quantity')
+        .val(0)
+        .focus()
+        .end()
+        .find('span.subtotal')
+        .text(0);
+
     countTotal();
 });
 
-$('#order-form input:reset').click(function () {//重置鍵，移除所有訂購項
+$resetbtn.click(function () {//重置鍵，移除所有訂購項
     $('.order-control .form-field.act').find('.field-remover').click();
     $('#add-goods').click();
 });
@@ -92,11 +102,12 @@ $('#order-form input:reset').click(function () {//重置鍵，移除所有訂購
 //get products
 var $tbody = $('tbody');
 $.getJSON('products-table.json',function (data) {
-    console.dir(data);
+    // console.dir(data);
     $.each(data,function (key,value) {
-        $('.tr-products.tr-origin')
+       var data= $('.tr-products.tr-origin')
             .clone()
             .removeClass('tr-origin hidden')
+            .data('belong',value.image)
             .find('td')
             .each(function (index, elem) {
                 // console.log(elem.dataset.td);
@@ -105,9 +116,9 @@ $.getJSON('products-table.json',function (data) {
                         elem.innerHTML = value['name'];
                         var image = document.createElement('img');
                         var imgDiv = document.createElement('div');
-                        image.setAttribute('src','img/'+value['image']+'.jpg');
+                        image.setAttribute('src','img/'+value['image']+'.jpg')
+                        image.setAttribute('alt',value['image']);//給該列加個可辨認產品的參數，之後操作可用
                         imgDiv.appendChild(image);
-
                         this.appendChild(imgDiv);
                         break;
                     case 'description':
@@ -119,8 +130,8 @@ $.getJSON('products-table.json',function (data) {
                     case 'price':
                         elem.innerHTML = value['price'];
                         break;
-                    default:
-                        console.log('fail');
+                    // default:
+                    //     console.log('fail');
                 }
                 // console.log('complete loop');
             })
@@ -128,6 +139,7 @@ $.getJSON('products-table.json',function (data) {
             .appendTo($tbody);
     });
 });
+
 
 
 // function executeAjax(url,func,myTarget,context) {
