@@ -21,9 +21,19 @@
             <h1>烘焙坊</h1>
         </a>
         <div id="cart-container">
-            <span>購物車</span>
-            <div id="cart">0</div>
-            <button id="clear-cart">清空購物車</button>
+            <div id="tiny-cart"></div>
+            <div id="cart-slide-block">
+                <span id="to-cart">前往訂單</span>
+                <div id="cart-counter">0</div>
+                <span>項商品</span>
+                <div id="cart-list">
+                    <div class="cart-list-items hidden">
+                        <span class="cart-item"></span>數量<span class="cart-list-count"></span>
+                        <div class="remove-list-item">X</div>
+                    </div>
+                </div>
+                <button id="clear-cart" class="hidden">清空訂單</button>
+            </div>
         </div>
         <div id="menu-block">
             <a href="javascript:;" id="menu-toggle">
@@ -35,7 +45,7 @@
                 <li class="nav-btn" data-marks="news"></li>
                 <li class="nav-btn" data-marks="about"></li>
                 <li class="nav-btn" data-marks="products"></li>
-                <li class="nav-btn" data-marks="order"></li>
+                <li class="nav-btn j-order" data-marks="order"></li>
                 <li class="nav-btn" data-marks="contact"></li>
             </ul>
         </div>
@@ -214,16 +224,24 @@
                 <th>商品描述</th>
                 <th>成分</th>
                 <th>價格</th>
+                <th>數量</th>
             </tr>
             </thead>
             <tbody>
             <tr class="tr-products tr-origin hidden">
                 <td data-td="name" data-cn="品名" width="30%"></td>
-                <td data-td="description" data-cn="商品描述" width="30%"></td>
-                <td data-td="made-from" data-cn="成分" width="30%"></td>
-                <td data-td="price" data-cn="價格" width="10%"></td>
+                <td data-td="description" data-cn="商品描述" width="40%"></td>
+                <td data-td="made-from" data-cn="成分" width="20%"></td>
+                <td data-td="price" data-cn="價格"></td>
+                <td data-td="conut" data-cn="數量" width="10%">
+                    <input class="products-counter" type="text" size="2">
+                    <div class="counter-btn">
+                        <button>+</button>
+                        <button>-</button>
+                    </div>
+                </td>
                 <td>
-                    <button class="into-cart">加入購買清單</button>
+                    <button class="add-into-cart">加入購買清單</button>
                 </td>
             </tr>
             </tbody>
@@ -263,8 +281,8 @@
                     <label for="unit-price">單價:新台幣</label>
                     <span id="unit-price" class="unit-price">0</span>
                     <span>元</span>
-                    <label for="quantity">數量:</label>
-                    <input type="number" name="quantity" id="quantity" class="quantity" min="0">
+                    <label for="l-quantity">數量:</label>
+                    <input type="number" name="quantity" id="l-quantity" class="quantity" min="0" value="0">
                     <span>小計:
                         <span class="subtotal">0</span>
                         元
@@ -355,16 +373,14 @@
             navList.classList.remove('display-toggle');
         }
     }
-    function changeBlock() {
+    function changeBlock() {//換頁函數
         var marks = $(this).data('marks');
         var $this = $(this);
-
 
         $('.template').addClass('hidden');//先隱藏所有區塊
         $('.' + marks).removeClass('hidden');//移除需要顯示的hidden類名
         $(window).scrollTop(0);//回每頁頂部
-//    console.log($(this).css('background-position'));
-//    console.log($(this).index());
+
         var hoverColor = $this.css('background-position');
         //將所有按鈕顏色恢復
         $navlistBtn.each(function () {
@@ -374,19 +390,23 @@
         $this.css('background-position', hoverColor);
 
         $resetbtn.click();
-        /*若點擊的是填寫訂單頁面，檢查cart*/
+        /*若點擊的是填寫訂單頁面，檢查cart並從cart取得儲存的資料*/
         if ($this.data('marks') === 'order') {
             for (var i = 0; i < cart.length; i++) {
                 cloneOrder()
                     .find('select')
-                    .val(cart[i])
-                    .change()
+                    .val(cart[i].alt)
+                    .change()//強制觸發一次綁在上頭的change事件(以刷新訂購單資料)，ref:品名選擇變化事件
+                    .end()
+                    .find('.quantity')
+                    .val(cart[i].count)
                     .end()
                     .insertAfter($orderControl.children('.form-field.hidden'));
-
             }
+
         }
-    }
+    }//換頁
+
     //更改網址
     //        history.pushState(null,null,originHref+'?p='+marks);
     //        var originHref = window.location.href;
@@ -474,41 +494,148 @@
 
     //訂單連動
     /*產品介紹頁面，點擊"加入購買清單"，
-     將該品項存在陣列(購物車)裡,
+     將該品項及數量存在陣列(購物車)裡,
      重複點擊==>檢查購物車有無相同資料，(不重複儲存)
      待點擊"填寫訂單"時，
      檢查購物車所有儲存的資料，
      在填寫訂單頁面自動新增一條相應訂購欄*/
     var cart = [];
-    $('table.rwd-table').on('click', 'button', function (event) {
+    var $table = $('table.rwd-table');
+    $table.on('click', 'button.add-into-cart', function (event) {/*加入購物清單事件*/
         var $this = $(this);
         var temp = null;
-        var alt = $this.closest('tr').find('td:first-child img').attr('alt');
-//        console.log(alt);
+        var $thisTr = $this.closest('tr');
+        var alt = $thisTr.find('td:first-child img').attr('alt');//獲取英文品名
+        var nameCn = $thisTr.find('td:first-child').text();//獲取中文名
+        var count = parseInt($thisTr.find('.products-counter').val());//獲取商品數量
+        console.log(count + ' ' + alt);
         for (var i = 0; i < cart.length; i++) {
-            if (cart[i] !== alt) {
-                temp = alt;
+            if (cart[i].alt !== alt) { //檢查品名不同先存temp裡，繼續迴圈下一個出來檢查
+                /*如果操作的數量是零，代表該操作是要從清單裡刪除該筆資料，所以不進入新增，
+                 繼續迴圈下一個出來檢查。(如果在上一級條件式檢查，會進入break，
+                 導致第一個檢查到非同名之後則跳出函數，而刪除失敗)*/
+                if (count !== 0) {
+                    temp = {'alt': alt, 'count': count, 'name-cn': nameCn};
+                }
+//                console.log(temp);
+            } else if (cart[i].alt === alt && cart[i].count !== count) {
+                cart.splice(i, 1);
+                refreshList('remove');
+                if (count !== 0) {
+                    temp = {'alt': alt, 'count': count, 'name-cn': nameCn};
+                }
             } else {
                 temp = null;
                 break;
             }
+
         }
-        if (cart.length === 0) {
-            cart.push(alt);
+        function refreshList(tap, obj) {/*刷新購物清單函數*/
+            var $cardList = $('#cart-list');
+//            $cardList.find('.act').remove();
+            if (tap === 'add') {
+                console.log('ref succ');
+//            console.log(obj);
+                $('.cart-list-items.hidden')
+                    .clone()
+                    .removeClass('hidden')
+                    .addClass('act')
+                    .find('.cart-item')
+                    .text(obj['name-cn'])
+                    .siblings('.cart-list-count')
+                    .text(obj['count'])
+                    .end()
+                    .end()
+                    .appendTo($cardList);
+            } else if (tap === 'remove') {
+                console.log('ref remove');
+                $cardList.find('.act').eq(i).remove();
+            }
+        }
+
+        if (cart.length === 0 && count !== 0) {
+            cart.push({'alt': alt, 'count': count, 'name-cn': nameCn});
+            /*每個cart陣列內容物操作都要刷新購物清單(調用refreshList)*/
+            refreshList('add', {'alt': alt, 'count': count, 'name-cn': nameCn});
         } else if (temp) {
             cart.push(temp);
+            refreshList('add', temp);
         }
-        $('#cart').text(cart.length);
-    });
-//    setInterval(function () {
-//        console.log(cart);
-//    }, 2000)
+        $('#cart-counter').text(cart.length);
 
-    $('#clear-cart').click(function () {
-        cart.length=0;
-        $('#cart').text(cart.length);//購物車計數器歸零
-        $resetbtn.click();//重置訂單
+        toggleClearCartBtn(cart.length);
     });
+
+    function toggleClearCartBtn(countValue) {
+        if (countValue != 0) {
+            $('#clear-cart').removeClass('hidden');
+            $('#tiny-cart').css('background-color','#ead634');
+        } else {
+            $('#clear-cart').addClass('hidden');
+            $('#tiny-cart').css('background-color','');
+        }
+    }
+    setInterval(function () {
+        console.table(cart);
+    }, 2000);
+
+
+    $('#clear-cart').click(function () {/*清除購物車事件*/
+        cart.length = 0;//清空cart陣列
+        $('#cart-list').find('.cart-list-items.act').remove();//清除購物清單
+        $('#cart-counter').text(cart.length);//購物車計數器歸零
+        $resetbtn.click();//重置訂單
+
+        toggleClearCartBtn(cart.length);
+    });
+
+    var countValue = 1;
+    var $productsCounter = $('.products-counter');
+    $productsCounter.val(countValue);
+
+    function handleCounter() {/*處理加減函數*/
+        var $this = $(this);
+        var $individualProductsCounter = $this.closest('td').find('.products-counter');
+        countValue = parseInt($individualProductsCounter.val());
+        var sign = $this.text();
+        if (sign === '+') {
+            countValue += 1;
+        } else if (sign === '-' && $individualProductsCounter.val() > 0) {
+            countValue--;
+        }
+        $individualProductsCounter.val(countValue);
+
+    }
+    /*處理加減數量按鈕事件*/
+    $table.on('click', '.counter-btn button:first-child', handleCounter);//+
+    $table.on('click', '.counter-btn button:last-child', handleCounter);//-
+
+    /*前往購物清單事件*/
+    $('#to-cart').on('click', function () {
+        $('.nav-btn.j-order').click();
+        /*參考changeBlock函數*/
+    });
+
+    function toRemoveListItem() {/*購物清單裡的"X"點擊事件函數*/
+        $this = $(this);
+        //index()返回該選中jquery集合裡，第一個物件在"同級"間排第幾個，從0開始。
+        //此處同級最前面有一個hidden的物件，所以返回的數字都會是+1。
+        var $thisParent = $this.closest('.act');
+        var getIndex = $thisParent.index();
+        $thisParent.remove();//砍掉清單內資料
+        //cart陣列裡也必須連動，又，因cart陣列裡順序與清單順序相同，故找出同索引的元素剔除即可
+        cart.splice(getIndex - 1, 1);//連動刪除cart陣列裡的物件
+        $('#cart-counter').text(cart.length);//刷新清單筆數
+
+        toggleClearCartBtn(cart.length);
+
+    }
+    $('#cart-list').on('click', '.remove-list-item', toRemoveListItem);
+    /*購物清單裡的"X"點擊事件*/
+
+    $('#tiny-cart').on('click', function () {
+        $(this).siblings('#cart-slide-block').slideToggle();
+    })
 </script>
 </body>
 </html>

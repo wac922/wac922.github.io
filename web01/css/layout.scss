@@ -14,66 +14,84 @@ $min-templateHeight: 700px;
 .order-control {
   margin: 1em auto;
 }
+
+  //cart start
 #cart-container{
-  background-color:#f4e4c8;
-width: 80px;
-  height: 80px;
+  //background-image: url("../img/cart-01.svg");
+  background-color:#fdfdee;
+  min-width: 12rem;
+  //height: 80px;
   //border: 2px solid #ffa4cc;
-  padding: 10px;
+  //padding: 10px;
   box-sizing: border-box;
-  border-radius: 50% 0% 0% 0%;
+  //border-radius: 50% 0% 0% 0%;
   position: absolute;
-  right: -80px;
+  right: 0px;
   top:80px;
   //transform: rotate(-90deg);
   //transform-origin: 80px 0;
- z-index: -1;
-  //visibility: collapse;
+ //z-index: -1;
+ // visibility: collapse;
   //opacity: 0;
-  #cart{
+  #tiny-cart{
     width: 30px;
-    height:30px;
-    text-align: center;
-    color: #f6f87a;
-    border-radius: 50% 0% 50% 50%;
-    background-color: #ff5b58;
+    height: 30px;
     position: absolute;
-    left: -30px;
-    visibility: visible;
-    //transform-origin: 0px 0px;
-    //transform:rotate(90deg) ;
+    top:-30px;
+    right: 0;
+    background-color: #cccccc;
+    background-image: url("../img/cart.svg");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    cursor: pointer;
   }
-  &:hover{
-    //transform: rotate(0deg);
-    transition: 1s;
-    visibility: visible;
-    right: 0px;
-    //opacity: 1;
-    #cart{
-      //top:20px;
-      left: 20px;
-      border-radius: 50%;
-      transition: 1s;
-      //transform-origin: 20px 50px;
-      //transform:rotate(-180deg) ;
-    }
-    button{
-      height: 2em;
-      transition: 1s;
-      right: 1px;
-    }
+  #cart-counter{
+    width: 30px;
+    //height:30px;
+    text-align: center;
+    color: #ff5b58;
+    border-radius: 50% 50% 50% 50%;
+    //background-color: #ff5b58;
+    display: inline-block;
   }
-  span{
+  #to-cart{
     margin: auto;
+    cursor: pointer;
+    background-color: #f6f87a;
+    font-weight: 600;
+  }
+  .cart-list-items.act{
+    border-bottom: 1px solid #666;
+    span{
+      margin: 5px;
+      color: #ff9504;
+    }
+    .remove-list-item{
+      display: inline-block;
+      margin: 2px;
+      padding: 0.2em;
+      //border: 1px solid #666;
+      border-radius: 50%;
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      color: #ffffff;
+      background-color: darkred;
+      cursor: pointer;
+    }
   }
   button{
     position: absolute;
-    bottom:-20px;
+    //top:0;
+    right:0;
     width: 6em;
-    height: 0;
+    //height: 0;
     word-break: keep-all;
+    border-radius: 0 0 50% 50%;
   }
 }
+//cart end
 //=========layout
 
 nav {
@@ -125,7 +143,7 @@ nav {
     //right:0;
     clear: both;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
     //border: 1px solid red;
     li {
       //border: 2px solid green;
@@ -159,6 +177,7 @@ nav {
       }
     }
     li:nth-child(4) {
+      display: none;
       background: url("../img/menu.png") 0 -69px no-repeat;
       &:hover {
         background: url("../img/menu.png") -86.252px -69px no-repeat;
@@ -447,9 +466,11 @@ section::before {
 
 .rwd-table {
   table-layout: fixed;
+  text-align: center;
   th {
     word-break: keep-all;
     font-weight: 600;
+    text-align: center;
   }
   img {
     max-width: 100%;
@@ -473,6 +494,21 @@ section::before {
   td {
     border: 1px solid white;
     box-sizing: border-box;
+    text-align: center;
+    .counter-btn{
+      display: inline-block;
+      button{
+        margin: 2px;
+        width: 3.5em;
+        height: 2em;
+        //font-size: large;
+        //display: block;
+      }
+    }
+    input{
+      margin: 0;
+    }
+
   }
 }
 
@@ -614,11 +650,12 @@ footer {
       }
       .nav-list {
         position: absolute;
-        right: 5px;
-        bottom: -208px;
+        right: 0px;
+        //bottom: -208px;
+        top:50px;
         display: none;
         width: 120px;
-        height: 200px;
+        //height: 200px;
         margin: 5px 0;
         flex-direction: column;
         align-items: center;
@@ -633,6 +670,10 @@ footer {
         }
       }
     }
+  }
+  #cart-container{
+    right: 65px;
+    top:55px;
   }
   .template {
     margin-top: $nav-670-height;

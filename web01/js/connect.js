@@ -11,16 +11,18 @@ function loadFinish() {//品名讀入後新增一個空白訂購欄
     $('#add-goods').click();
 }
 
-function  countSubtotal() { //計算小計
+function  countSubtotal() { /*計算小計函數*/
     var $closetParent =  $(this).closest('.form-field');
     var unitPrice = parseInt($closetParent.find('.quantity').prevAll('.unit-price').text());
     var quantity = parseInt($closetParent.find('.quantity').val());
-
+    // console.log(quantity);
+    // console.log(unitPrice);
     $closetParent.find('span.subtotal').text(unitPrice*quantity);
+    // console.log('succ');
     countTotal();
 }
 
-function countTotal() {//計算總計
+function countTotal() {/*計算總計函數*/
     var sub = [];
     var total = 0;
     $('.subtotal').each(function (index, elem) {
@@ -33,12 +35,12 @@ function countTotal() {//計算總計
     countTotalPrice();
 }
 
-function removeOrder() {//清除該欄
+function removeOrder() {/*清除該欄函數*/
     $(this).closest('.form-field').remove();
     countTotal();
 }
 
-function countTotalPrice() {//計算應付金額
+function countTotalPrice() {/*計算應付金額函數*/
     var totalPrice =  parseInt($total.text());
     var freightExpenseSpan = $('#freight-expense');
     var amountPayableSpan = $('#amount-payable');
@@ -53,7 +55,7 @@ function countTotalPrice() {//計算應付金額
     amountPayableSpan.text(countAmountPayable);
     // }
 }
-function cloneOrder() {//複製訂購欄位
+function cloneOrder() {/*複製訂購欄位函數*/
    return $orderControl
         .find('div.form-field.hidden')
         .clone(true)
@@ -74,14 +76,15 @@ $goodsSelected.load('php/tanfen-order-goods.php',loadFinish)
         $.getJSON('unit-price.json',function (data) {
            var value = data[$this.val()];
             $this.closest('.form-field').find('.unit-price').text(value);
+            $('.quantity').change();/*單價讀入後才取得數量計算小計*/
         });
 });
 
-$orderControl.on('click','.field-remover',removeOrder);//清除該欄位
+$orderControl.on('click','.field-remover',removeOrder);//清除該欄位事件
 
-$('#quantity').change(countSubtotal);//數量變化即時計算小計額
+$('.quantity').change(countSubtotal);//數量變化即時計算小計額
 
-$goodsSelected.change(function () {//品名變化清空之前的數量及小計
+$goodsSelected.change(function () {/*品名選擇變化事件，清空之前的數量及小計*/
     $(this).closest('.form-field')
         .find('.quantity')
         .val(0)
@@ -99,7 +102,7 @@ $resetbtn.click(function () {//重置鍵，移除所有訂購項
 });
 
 
-//get products
+//get products 產品介紹頁
 var $tbody = $('tbody');
 $.getJSON('products-table.json',function (data) {
     // console.dir(data);

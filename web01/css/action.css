@@ -135,46 +135,57 @@ button {
   margin: 1em auto; }
 
 #cart-container {
-  background-color: #f4e4c8;
-  width: 80px;
-  height: 80px;
-  padding: 10px;
+  background-color: #fdfdee;
+  min-width: 12rem;
   box-sizing: border-box;
-  border-radius: 50% 0% 0% 0%;
   position: absolute;
-  right: -80px;
-  top: 80px;
-  z-index: -1; }
-  #cart-container #cart {
+  right: 0px;
+  top: 80px; }
+  #cart-container #tiny-cart {
     width: 30px;
     height: 30px;
-    text-align: center;
-    color: #f6f87a;
-    border-radius: 50% 0% 50% 50%;
-    background-color: #ff5b58;
     position: absolute;
-    left: -30px;
-    visibility: visible; }
-  #cart-container:hover {
-    transition: 1s;
-    visibility: visible;
-    right: 0px; }
-    #cart-container:hover #cart {
-      left: 20px;
+    top: -30px;
+    right: 0;
+    background-color: #cccccc;
+    background-image: url("../img/cart.svg");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    border-radius: 50%;
+    cursor: pointer; }
+  #cart-container #cart-counter {
+    width: 30px;
+    text-align: center;
+    color: #ff5b58;
+    border-radius: 50% 50% 50% 50%;
+    display: inline-block; }
+  #cart-container #to-cart {
+    margin: auto;
+    cursor: pointer;
+    background-color: #f6f87a;
+    font-weight: 600; }
+  #cart-container .cart-list-items.act {
+    border-bottom: 1px solid #666; }
+    #cart-container .cart-list-items.act span {
+      margin: 5px;
+      color: #ff9504; }
+    #cart-container .cart-list-items.act .remove-list-item {
+      display: inline-block;
+      margin: 2px;
+      padding: 0.2em;
       border-radius: 50%;
-      transition: 1s; }
-    #cart-container:hover button {
-      height: 2em;
-      transition: 1s;
-      right: 1px; }
-  #cart-container span {
-    margin: auto; }
+      width: 1em;
+      height: 1em;
+      text-align: center;
+      color: #ffffff;
+      background-color: darkred;
+      cursor: pointer; }
   #cart-container button {
     position: absolute;
-    bottom: -20px;
+    right: 0;
     width: 6em;
-    height: 0;
-    word-break: keep-all; }
+    word-break: keep-all;
+    border-radius: 0 0 50% 50%; }
 
 nav {
   width: 100%;
@@ -208,7 +219,7 @@ nav {
 #menu-block .nav-list {
   clear: both;
   align-items: center;
-  justify-content: center; }
+  justify-content: space-around; }
   #menu-block .nav-list li {
     min-width: 83.252px;
     max-width: 83.252px;
@@ -228,6 +239,7 @@ nav {
     #menu-block .nav-list li:nth-child(3):hover {
       background: url("../img/menu.png") -86.252px -46px no-repeat; }
   #menu-block .nav-list li:nth-child(4) {
+    display: none;
     background: url("../img/menu.png") 0 -69px no-repeat; }
     #menu-block .nav-list li:nth-child(4):hover {
       background: url("../img/menu.png") -86.252px -69px no-repeat; }
@@ -413,10 +425,12 @@ section::before {
   background-color: rgba(255, 255, 255, 0.9); }
 
 .rwd-table {
-  table-layout: fixed; }
+  table-layout: fixed;
+  text-align: center; }
   .rwd-table th {
     word-break: keep-all;
-    font-weight: 600; }
+    font-weight: 600;
+    text-align: center; }
   .rwd-table img {
     max-width: 100%;
     height: auto; }
@@ -427,7 +441,16 @@ section::before {
     text-align: center; }
   .rwd-table td {
     border: 1px solid white;
-    box-sizing: border-box; }
+    box-sizing: border-box;
+    text-align: center; }
+    .rwd-table td .counter-btn {
+      display: inline-block; }
+      .rwd-table td .counter-btn button {
+        margin: 2px;
+        width: 3.5em;
+        height: 2em; }
+    .rwd-table td input {
+      margin: 0; }
 
 .box fieldset {
   margin: 50px auto;
@@ -511,11 +534,10 @@ footer {
         border-left: 1px solid #666; }
       nav #menu-block .nav-list {
         position: absolute;
-        right: 5px;
-        bottom: -208px;
+        right: 0px;
+        top: 50px;
         display: none;
         width: 120px;
-        height: 200px;
         margin: 5px 0;
         flex-direction: column;
         align-items: center;
@@ -523,6 +545,10 @@ footer {
         background-color: rgba(255, 255, 255, 0.8); }
         nav #menu-block .nav-list li {
           margin: 12px auto; }
+
+  #cart-container {
+    right: 65px;
+    top: 55px; }
 
   .template {
     margin-top: 55px;
