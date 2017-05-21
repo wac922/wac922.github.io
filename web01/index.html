@@ -149,7 +149,7 @@
 <!--template news start-->
 <div class="template news hidden">
     <section>
-        <img src="img/construction-site-153692.svg" alt="">
+        <img src="img/tanfenPackage.png" alt="">
     </section>
 </div>
 <!--template about start-->
@@ -239,6 +239,7 @@
                         <button>+</button>
                         <button>-</button>
                     </div>
+                    <div class="error hidden">請輸入大於零的數字</div>
                 </td>
                 <td>
                     <button class="add-into-cart">加入購買清單</button>
@@ -255,28 +256,33 @@
             <div class="form-field">
                 <label for="name">姓名:</label>
                 <input name="name" id="name" required/>
-                <span class="error"></span>
+                <span class="error hidden"></span>
             </div>
             <div class="form-field">
                 <label for="tele">電話:</label>
-                <input name="tele" id="tele" required/>
-                <span class="error"></span>
+                <input name="tele" id="tele" />
+                <span class="error hidden">請輸入正確格式電話(請務必填寫區碼)</span>
+            </div>
+            <div class="form-field">
+                <label for="tele">手機:</label>
+                <input name="tele" id="mobile-tele" required/>
+                <span class="error hidden">請輸入正確格式電話</span>
             </div>
             <div class="form-field">
                 <label for="addr">配送地址:</label>
                 <input name="addr" id="addr" required/>
-                <span class="error"></span>
+                <span class="error hidden"></span>
             </div>
             <div class="form-field">
                 <label for="order-date">配送日期:</label>
                 <input type="date" name="order-date" id="order-date" required/>
-                <span class="error"></span>
+                <span class="error hidden"></span>
             </div>
             <div class="order-control">
                 <div class="form-field hidden">
                     <input type="button" class="field-remover" value="X">
                     <label for="goods-chooser-control">品名:</label>
-                    <select name="goods" id="goods-chooser-control" class="goods-chooser-control">
+                    <select name="goods" id="goods-chooser-control" class="goods-chooser-control" disabled>
                     </select><br/>
                     <label for="unit-price">單價:新台幣</label>
                     <span id="unit-price" class="unit-price">0</span>
@@ -294,8 +300,8 @@
             <div class="form-field">總計: <span id="total"></span></div>
             <div class="form-field">運費: <span id="freight-expense">0</span><span>元，滿兩千元(含)免運費</span></div>
             <div class="form-field">應付金額: <span id="amount-payable">0</span><span>元</span></div>
-            <input type="submit" value="送出訂單">
-            <input type="reset" value="重置">
+            <input class="btn" type="submit" value="送出訂單">
+            <input class="btn" type="reset" value="重置">
         </form>
     </section>
 </div>
@@ -323,7 +329,7 @@
                 </div>
                 <div class="form-field">
                     <label for="message">留言:</label>
-                    <textarea name="message" id="message"></textarea>
+                    <textarea name="message" id="message" cols="40" rows="10"></textarea>
                     <span class="error"></span>
                 </div>
                 <input class="btn" type="submit" value="送出"/>
@@ -389,10 +395,12 @@
 //    console.log(hoverColor);
         $this.css('background-position', hoverColor);
 
-        $resetbtn.click();
+//        $resetbtn.click();
+        $('.form-field.act').remove();
+
         /*若點擊的是填寫訂單頁面，檢查cart並從cart取得儲存的資料*/
         if ($this.data('marks') === 'order') {
-            for (var i = 0; i < cart.length; i++) {
+            for (var i = cart.length - 1 ; i >= 0 ; i--) {
                 cloneOrder()
                     .find('select')
                     .val(cart[i].alt)
@@ -403,7 +411,9 @@
                     .end()
                     .insertAfter($orderControl.children('.form-field.hidden'));
             }
-
+            $('#tiny-cart').click();//進入訂單則隱藏右上角的購物清單
+        }else if($this.data('marks') === 'products'){
+            $('#tiny-cart').siblings('#cart-slide-block').slideDown();
         }
     }//換頁
 
@@ -501,7 +511,7 @@
      在填寫訂單頁面自動新增一條相應訂購欄*/
     var cart = [];
     var $table = $('table.rwd-table');
-    $table.on('click', 'button.add-into-cart', function (event) {/*加入購物清單事件*/
+    function addIntoCart () {/*加入購物清單事件*/
         var $this = $(this);
         var temp = null;
         var $thisTr = $this.closest('tr');
@@ -511,24 +521,29 @@
         console.log(count + ' ' + alt);
         for (var i = 0; i < cart.length; i++) {
             if (cart[i].alt !== alt) { //檢查品名不同先存temp裡，繼續迴圈下一個出來檢查
-                /*如果操作的數量是零，代表該操作是要從清單裡刪除該筆資料，所以不進入新增，
+                /*如果用戶操作的數量是零，代表該操作是要從清單裡刪除該筆資料，所以不進入新增，
                  繼續迴圈下一個出來檢查。(如果在上一級條件式檢查，會進入break，
                  導致第一個檢查到非同名之後則跳出函數，而刪除失敗)*/
                 if (count !== 0) {
                     temp = {'alt': alt, 'count': count, 'name-cn': nameCn};
                 }
 //                console.log(temp);
-            } else if (cart[i].alt === alt && cart[i].count !== count) {
-                cart.splice(i, 1);
-                refreshList('remove');
+//            } else if (cart[i].alt === alt && cart[i].count !== count) {//同名不同數量
+            } else if (cart[i].alt === alt ) {//同名，且無論任何數量都需刷新對應數量
+//                cart.splice(i, 1);
+//                refreshList('remove');
                 if (count !== 0) {
-                    temp = {'alt': alt, 'count': count, 'name-cn': nameCn};
-                }
-            } else {
-                temp = null;
-                break;
-            }
+                    cart[i].count += count; //商品數量疊加
+                    temp = null; //同名不同數量不得讓temp有值，會在後面再新增進去一筆
 
+                    //改變list清單數量
+                    var $countBlock = $('.cart-list-items.act').eq(i).find('.cart-list-count');
+                    var oldCount= parseInt($countBlock.text());
+                    $countBlock.text(oldCount + count);
+                    break;
+//                    temp = {'alt': alt, 'count': count, 'name-cn': nameCn};
+                }
+            }
         }
         function refreshList(tap, obj) {/*刷新購物清單函數*/
             var $cardList = $('#cart-list');
@@ -552,7 +567,6 @@
                 $cardList.find('.act').eq(i).remove();
             }
         }
-
         if (cart.length === 0 && count !== 0) {
             cart.push({'alt': alt, 'count': count, 'name-cn': nameCn});
             /*每個cart陣列內容物操作都要刷新購物清單(調用refreshList)*/
@@ -564,20 +578,29 @@
         $('#cart-counter').text(cart.length);
 
         toggleClearCartBtn(cart.length);
-    });
+
+        console.table(cart);
+
+
+    }
+
+
+    $table.on('click', 'button.add-into-cart',addIntoCart);/**/
 
     function toggleClearCartBtn(countValue) {
         if (countValue != 0) {
             $('#clear-cart').removeClass('hidden');
-            $('#tiny-cart').css('background-color','#ead634');
+//            $('#tiny-cart').css({'background-color':'#ead634','background-image':'url("img/cart.svg")','transition':'1s'});
+            $('#tiny-cart').css({'animation':'0.3s tinyCartAnimation  forwards '});
         } else {
             $('#clear-cart').addClass('hidden');
-            $('#tiny-cart').css('background-color','');
+//            $('#tiny-cart').css({'background-color':'','background-image':''});
+            $('#tiny-cart').css({'animation':''});
         }
     }
-    setInterval(function () {
-        console.table(cart);
-    }, 2000);
+//    setInterval(function () {
+//        console.table(cart);
+//    }, 3000);
 
 
     $('#clear-cart').click(function () {/*清除購物車事件*/
@@ -605,15 +628,16 @@
         }
         $individualProductsCounter.val(countValue);
 
+        $(this).closest('.counter-btn').siblings('.error').addClass('hidden');
     }
     /*處理加減數量按鈕事件*/
     $table.on('click', '.counter-btn button:first-child', handleCounter);//+
     $table.on('click', '.counter-btn button:last-child', handleCounter);//-
 
-    /*前往購物清單事件*/
+    /*前往訂單事件*/
     $('#to-cart').on('click', function () {
         $('.nav-btn.j-order').click();
-        /*參考changeBlock函數*/
+        /*參考 changeBlock 函數*/
     });
 
     function toRemoveListItem() {/*購物清單裡的"X"點擊事件函數*/
@@ -622,20 +646,74 @@
         //此處同級最前面有一個hidden的物件，所以返回的數字都會是+1。
         var $thisParent = $this.closest('.act');
         var getIndex = $thisParent.index();
-        $thisParent.remove();//砍掉清單內資料
-        //cart陣列裡也必須連動，又，因cart陣列裡順序與清單順序相同，故找出同索引的元素剔除即可
+        console.log('listindex:'+getIndex);
+            //cart陣列裡也必須連動，又，因cart陣列裡順序與清單順序相同，故找出同索引的元素剔除即可
         cart.splice(getIndex - 1, 1);//連動刪除cart陣列裡的物件
         $('#cart-counter').text(cart.length);//刷新清單筆數
+        console.log($this.attr('class'));
+        /*判斷一把，看調用這個函數的是order訂單，還是list清單*/
+//        if($this.attr('class') === 'remove-list-item'){
+            $thisParent.remove();//砍掉清單內資料
+            $('.form-field.act').eq(getIndex-1).remove();/*連動將order上的商品項刪除*/
+//        }else if($this.attr('class') === 'field-remover'){
+//            $('.cart-list-items.act').eq(getIndex-1).remove();
+        countTotal();
+//        }
 
         toggleClearCartBtn(cart.length);
-
+        console.table(cart);
     }
     $('#cart-list').on('click', '.remove-list-item', toRemoveListItem);
     /*購物清單裡的"X"點擊事件*/
 
     $('#tiny-cart').on('click', function () {
         $(this).siblings('#cart-slide-block').slideToggle();
-    })
+    });
+
+    /*驗證商品數量欄位輸入合法性(不得為非數字，小於0)*/
+    function validNumber() {
+        $this = $(this);
+        var thisValue = $this.val();
+//        console.log(thisValue);
+//        console.log(typeof thisValue);
+        var reg = /^\d+$/;
+        $(this).siblings('.error').addClass('hidden');
+        if(!reg.test(thisValue)){
+            $(this).val(0);
+            $(this).siblings('.error').removeClass('hidden');
+        }
+    }
+    $table.on('blur','.products-counter',validNumber);/*產品介紹表格裡數量欄位驗證事件*/
+
+    /*驗證手機*/
+    function validTele() {
+        $this = $(this);
+        var getTele = $this.val();
+//        console.log(this.id);
+        /*0900 000 000*/
+        var reg=null;
+        if(this.id === 'mobile-tele'){
+         reg = /^09\d{2}[-\s]?\d{3}[-\s]?\d{3}$/;
+        }else if(this.id === 'tele'){
+            /*049-2712950  (04)2712345  02 2123456*/
+         reg = /^\(?\d{2,3}[)\s-]?\d{6,7}$/;
+        }
+//        var reg = /0988305049/;
+        $this.siblings('.error').addClass('hidden');
+        if(!reg.test(getTele)){
+            $this.siblings('.error').removeClass('hidden');
+        }
+    }
+    $('#mobile-tele').on('blur',validTele);
+    $('#tele').on('blur',validTele);
+
+    /*驗證郵箱*/
+    function validMail() {
+        $this = $(this);
+        var getMail = $this.val();
+        //
+        var reg = /@/;
+    }
 </script>
 </body>
 </html>

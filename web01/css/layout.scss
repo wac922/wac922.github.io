@@ -11,9 +11,7 @@ $nav-height: 80px;
 $nav-670-height: 55px; //包括.template的margin-top也套用此數值
 $min-templateHeight: 700px;
 
-.order-control {
-  margin: 1em auto;
-}
+
 
   //cart start
 #cart-container{
@@ -34,13 +32,13 @@ $min-templateHeight: 700px;
  // visibility: collapse;
   //opacity: 0;
   #tiny-cart{
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     position: absolute;
-    top:-30px;
+    top:-50px;
     right: 0;
     background-color: #cccccc;
-    background-image: url("../img/cart.svg");
+    background-image: url("../img/cart-empty.svg");
     background-repeat: no-repeat;
     background-position: 50%;
     border-radius: 50%;
@@ -54,6 +52,7 @@ $min-templateHeight: 700px;
     border-radius: 50% 50% 50% 50%;
     //background-color: #ff5b58;
     display: inline-block;
+    position: relative;
   }
   #to-cart{
     margin: auto;
@@ -401,6 +400,17 @@ section::before {
 
 //===flip card animate end
 
+//template news start
+.template.news{
+  section{
+    background-color: rgba(255,255,255,0.7);
+    img{
+      width: 100%;
+    }
+  }
+}
+//template news end
+
 //===template about start
 .template.about {
   .wrapper {
@@ -508,7 +518,10 @@ section::before {
     input{
       margin: 0;
     }
-
+    .error{
+      color: red;
+      font-size: 0.7em;
+    }
   }
 }
 
@@ -553,18 +566,20 @@ section::before {
       input, textarea {
         //position: absolute;
         left: 6em;
+        display: block;
       }
     }
+    //.btn:first-child {
+    //  //border:1px solid red;
+    //  background-color: #4147ff;
+    //}
+  }
+}
     .btn {
       margin-left: 50px;
       margin-top: 50px;
+      cursor: pointer;
     }
-    .btn:first-child {
-      //border:1px solid red;
-      background-color: #4147ff;
-    }
-  }
-}
 
 //===template contact end
 
@@ -586,6 +601,30 @@ section {
       //border: 1px solid red;
       span,label{
         word-break: keep-all;
+      }
+      .form-field{
+        margin: 1em;
+        .error{
+          color: red;
+          font-size: small;
+          word-break: keep-all;
+        }
+      }
+      .order-control {
+        margin: 1em auto;
+      }
+      input{
+        border-radius: 5px;
+        border: none;
+        box-shadow: rgb(225, 229, 25) 0px 0px 9px 0px;
+        &:focus{
+          box-shadow: rgb(87, 76, 229) 0px 0px 12px 1px;
+          //border: 2px solid red;
+        }
+
+      }
+      #add-goods{
+        display: none;
       }
     }
     select {

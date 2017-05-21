@@ -7,9 +7,9 @@ var $setUnitPrice = $('.unit-price');//單價欄位
 var $total =  $('#total'); //總計欄位
 var $resetbtn =$('#order-form input:reset');
 
-function loadFinish() {//品名讀入後新增一個空白訂購欄
-    $('#add-goods').click();
-}
+// function loadFinish() {//品名讀入後新增一個空白訂購欄
+//     $('#add-goods').click();
+// }
 
 function  countSubtotal() { /*計算小計函數*/
     var $closetParent =  $(this).closest('.form-field');
@@ -36,8 +36,16 @@ function countTotal() {/*計算總計函數*/
 }
 
 function removeOrder() {/*清除該欄函數*/
-    $(this).closest('.form-field').remove();
+    var $this = $(this);
+    var $thisParent = $this.closest('.act');
+    var getOrderIndex = $thisParent.index();
+    $this.closest('.form-field').remove();
+    console.log(getOrderIndex);
+    $('.cart-list-items.act').eq(getOrderIndex-1).remove();//刪除清單上對應商品
+    cart.splice(getOrderIndex-1,1);
+    $('#cart-counter').text(cart.length);
     countTotal();
+    console.table(cart);
 }
 
 function countTotalPrice() {/*計算應付金額函數*/
@@ -63,14 +71,14 @@ function cloneOrder() {/*複製訂購欄位函數*/
         .addClass('act');
 }
 
-$('#add-goods').click(function (event) {//新增訂購欄位
+$('#add-goods').click(function (event) {/*新增訂購欄位*/
     event.preventDefault();
     cloneOrder()
         .appendTo($orderControl);
 });
 
-// 讀取完才觸發增加訂購欄位(loadFinish)
-$goodsSelected.load('php/tanfen-order-goods.php',loadFinish)
+/* 讀取完才觸發增加訂購欄位(loadFinish)*/
+$goodsSelected.load('php/tanfen-order-goods.php')
     .change(function () { //讀取選單及選單改變時顯示單價
         var $this = $(this);
         $.getJSON('unit-price.json',function (data) {
@@ -80,9 +88,9 @@ $goodsSelected.load('php/tanfen-order-goods.php',loadFinish)
         });
 });
 
-$orderControl.on('click','.field-remover',removeOrder);//清除該欄位事件
+$orderControl.on('click','.field-remover',removeOrder);/*清除該欄位事件*/
 
-$('.quantity').change(countSubtotal);//數量變化即時計算小計額
+$('.quantity').change(countSubtotal);/*數量變化即時計算小計額*/
 
 $goodsSelected.change(function () {/*品名選擇變化事件，清空之前的數量及小計*/
     $(this).closest('.form-field')
@@ -96,13 +104,19 @@ $goodsSelected.change(function () {/*品名選擇變化事件，清空之前的�
     countTotal();
 });
 
-$resetbtn.click(function () {//重置鍵，移除所有訂購項
+$resetbtn.click(function (event) {/*重置鍵，移除所有訂購項*/
+    // event.preventDefault();
     $('.order-control .form-field.act').find('.field-remover').click();
-    $('#add-goods').click();
+    // $('#add-goods').click();
+    // $('.order-control .form-field.act').remove();
+    // cart.length = 0;
+    // $('.cart-list-items.act').remove();
+    // $('#add-goods').click();
+    countTotal();
 });
 
 
-//get products 產品介紹頁
+/*get products 產品介紹頁*/
 var $tbody = $('tbody');
 $.getJSON('products-table.json',function (data) {
     // console.dir(data);
