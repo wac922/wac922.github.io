@@ -112,6 +112,8 @@ $resetbtn.click(function (event) {/*重置鍵，移除所有訂購項*/
     // cart.length = 0;
     // $('.cart-list-items.act').remove();
     // $('#add-goods').click();
+    console.table(cart);
+    toggleClearCartBtn(cart.length);
     countTotal();
 });
 

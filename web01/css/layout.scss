@@ -11,7 +11,11 @@ $nav-height: 80px;
 $nav-670-height: 55px; //包括.template的margin-top也套用此數值
 $min-templateHeight: 700px;
 
-
+//.cartCounterAni{
+//  color: #413cea;
+//  transition:1s ease-in-out;
+//  -webkit-transition:1s ease-in-out;
+//}
 
   //cart start
 #cart-container{
@@ -53,6 +57,12 @@ $min-templateHeight: 700px;
     //background-color: #ff5b58;
     display: inline-block;
     position: relative;
+    top:0;
+    -webkit-transition: 1s ;
+    -moz-transition: 1s ;
+    -ms-transition: 1s ;
+    -o-transition: 1s ;
+    transition: 1s ;
   }
   #to-cart{
     margin: auto;

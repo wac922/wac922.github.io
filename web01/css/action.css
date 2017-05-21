@@ -148,7 +148,7 @@ button {
     background-color: #f6f87a; }
   100% {
     background-image: url("../img/cart.svg"); } }
-@keyframes bounceCounter {
+@-webkit-keyframes bounceCounter {
   100% {
     top: -20px; }
   100% {
@@ -183,7 +183,13 @@ button {
     color: #ff5b58;
     border-radius: 50% 50% 50% 50%;
     display: inline-block;
-    position: relative; }
+    position: relative;
+    top: 0;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    -ms-transition: 1s;
+    -o-transition: 1s;
+    transition: 1s; }
   #cart-container #to-cart {
     margin: auto;
     cursor: pointer;

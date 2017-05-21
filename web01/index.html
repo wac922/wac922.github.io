@@ -576,7 +576,18 @@
             refreshList('add', temp);
         }
         $('#cart-counter').text(cart.length);
-
+        $('#cart-counter').css({'color':'#ea2121',
+            'top':'-30px',
+            'opacity':'0',
+            'transition':'0.1s  linear',
+            '-webkit-transition':'0.1s  linear'});
+        setTimeout(function () {
+            $('#cart-counter').css({'color':'',
+                'top':'',
+                'opacity':'',
+                'transition':'',
+                '-webkit-transition':''});
+        },50);
         toggleClearCartBtn(cart.length);
 
         console.table(cart);
@@ -590,14 +601,17 @@
     function toggleClearCartBtn(countValue) {
         if (countValue != 0) {
             $('#clear-cart').removeClass('hidden');
-//            $('#tiny-cart').css({'background-color':'#ead634','background-image':'url("img/cart.svg")','transition':'1s'});
             $('#tiny-cart')
-                .css({'animation':'0.3s tinyCartAnimation  forwards ','-webkit-animation':'0.3s tinyCartAnimation  forwards '});
-
+                .css({'background-color':'#ead634',
+                    'background-image':'url("img/cart.svg")',
+                    'transition':'1s ease-in-out',
+                    '-webkit-transition':'1s ease-in-out'});
+//            $('#tiny-cart')//動畫在手機上效果不是很好，有點破圖
+//                .css({'animation':'0.3s tinyCartAnimation  forwards ','-webkit-animation':'0.3s tinyCartAnimation  forwards '});
         } else {
             $('#clear-cart').addClass('hidden');
-//            $('#tiny-cart').css({'background-color':'','background-image':''});
-            $('#tiny-cart').css({'animation':'','-webkit-animation':''});
+            $('#tiny-cart').css({'background-color':'','background-image':''});
+//            $('#tiny-cart').css({'animation':'','-webkit-animation':''});
         }
     }
 //    setInterval(function () {
