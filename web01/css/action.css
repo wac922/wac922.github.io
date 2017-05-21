@@ -130,6 +130,15 @@ button {
   cursor: pointer;
   font-size: large; }
 
+@-webkit-keyframes tinyCartAnimation {
+  50% {
+    width: 60px; }
+  50% {
+    height: 60px; }
+  100% {
+    background-color: #f6f87a; }
+  100% {
+    background-image: url("../img/cart.svg"); } }
 @keyframes tinyCartAnimation {
   50% {
     width: 60px; }
@@ -139,6 +148,11 @@ button {
     background-color: #f6f87a; }
   100% {
     background-image: url("../img/cart.svg"); } }
+@keyframes bounceCounter {
+  100% {
+    top: -20px; }
+  100% {
+    color: transparent; } }
 @keyframes bounceCounter {
   100% {
     top: -20px; }

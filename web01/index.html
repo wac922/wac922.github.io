@@ -591,11 +591,13 @@
         if (countValue != 0) {
             $('#clear-cart').removeClass('hidden');
 //            $('#tiny-cart').css({'background-color':'#ead634','background-image':'url("img/cart.svg")','transition':'1s'});
-            $('#tiny-cart').css({'animation':'0.3s tinyCartAnimation  forwards '});
+            $('#tiny-cart')
+                .css({'animation':'0.3s tinyCartAnimation  forwards ','-webkit-animation':'0.3s tinyCartAnimation  forwards '});
+
         } else {
             $('#clear-cart').addClass('hidden');
 //            $('#tiny-cart').css({'background-color':'','background-image':''});
-            $('#tiny-cart').css({'animation':''});
+            $('#tiny-cart').css({'animation':'','-webkit-animation':''});
         }
     }
 //    setInterval(function () {
