@@ -577,10 +577,10 @@
         }
         $('#cart-counter').text(cart.length);
         $('#cart-counter').css({'color':'#ea2121',
-            'top':'-30px',
+            'top':'-20px',
             'opacity':'0',
-            'transition':'0.1s  linear',
-            '-webkit-transition':'0.1s  linear'});
+            'transition':'0.1s   cubic-bezier(.08,.69,.35,1)',
+            '-webkit-transition':'0.1s   cubic-bezier(.08,.69,.35,1)'});
         setTimeout(function () {
             $('#cart-counter').css({'color':'',
                 'top':'',
@@ -604,8 +604,8 @@
             $('#tiny-cart')
                 .css({'background-color':'#ead634',
                     'background-image':'url("img/cart.svg")',
-                    'transition':'1s ease-in-out',
-                    '-webkit-transition':'1s ease-in-out'});
+                    'transition':'0.3s ease-in-out',
+                    '-webkit-transition':'0.3s ease-in-out'});
 //            $('#tiny-cart')//動畫在手機上效果不是很好，有點破圖
 //                .css({'animation':'0.3s tinyCartAnimation  forwards ','-webkit-animation':'0.3s tinyCartAnimation  forwards '});
         } else {
