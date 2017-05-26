@@ -18,7 +18,7 @@ function  countSubtotal() { /*計算小計函數*/
     // console.log(quantity);
     // console.log(unitPrice);
     $closetParent.find('span.subtotal').text(unitPrice*quantity);
-    // console.log('succ');
+    console.log($(this));
     countTotal();
 }
 
@@ -42,7 +42,7 @@ function removeOrder() {/*清除該欄函數*/
     $this.closest('.form-field').remove();
     console.log(getOrderIndex);
     $('.cart-list-items.act').eq(getOrderIndex-1).remove();//刪除清單上對應商品
-    cart.splice(getOrderIndex-1,1);
+    cart.splice(getOrderIndex-1,1);//刪除購物車陣列裡相對應項目
     $('#cart-counter').text(cart.length);
     countTotal();
     console.table(cart);
@@ -90,7 +90,28 @@ $goodsSelected.load('php/tanfen-order-goods.php')
 
 $orderControl.on('click','.field-remover',removeOrder);/*清除該欄位事件*/
 
+function syncCountToCart() {
+    var $this = $(this);
+    var $thisParent = $this.closest('.act');
+    var getOrderIndex = $thisParent.index();
+    var getOrderCount = $this.val();
+    cart[getOrderIndex-1].count = getOrderCount;
+    console.log(getOrderCount);
+}
+
 $('.quantity').change(countSubtotal);/*數量變化即時計算小計額*/
+$('.quantity').blur(function () {
+    var $this = $(this);
+    var $thisParent = $this.closest('.act');
+    var getOrderIndex = $thisParent.index();
+    var customCount = parseInt($this.val());
+    cart[getOrderIndex-1].count = customCount;
+    $('.cart-list-items.act')
+        .eq(getOrderIndex-1)
+        .find('.cart-list-count')
+        .text(customCount);
+    console.table(cart);
+});
 
 $goodsSelected.change(function () {/*品名選擇變化事件，清空之前的數量及小計*/
     $(this).closest('.form-field')

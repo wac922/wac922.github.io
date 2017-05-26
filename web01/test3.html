@@ -8,11 +8,19 @@
 </head>
 <body>
 <div>
-    <div class="div1"></div>
+    <div class="div1">0</div>
     <span></span>
 </div>
 <script>
-    document.write(history.length);
+    var i  =0 ;
+    for(var k = 0 ;k<=10; k++){
+
+        var oDiv =  document.getElementsByClassName('div1')[0];
+     setTimeout(function () {
+         oDiv.innerHTML=i++;
+     },5000)   ;
+
+    }
 </script>
 </body>
 </html>

@@ -397,6 +397,7 @@
 
 //        $resetbtn.click();
         $('.form-field.act').remove();
+            $('#tiny-cart').siblings('#cart-slide-block').slideDown();
 
         /*若點擊的是填寫訂單頁面，檢查cart並從cart取得儲存的資料*/
         if ($this.data('marks') === 'order') {
@@ -412,9 +413,10 @@
                     .insertAfter($orderControl.children('.form-field.hidden'));
             }
             $('#tiny-cart').click();//進入訂單則隱藏右上角的購物清單
-        }else if($this.data('marks') === 'products'){
-            $('#tiny-cart').siblings('#cart-slide-block').slideDown();
         }
+//        else if($this.data('marks') === 'products'){
+//            $('#tiny-cart').siblings('#cart-slide-block').slideDown();
+//        }
     }//換頁
 
     //更改網址
@@ -511,6 +513,7 @@
      在填寫訂單頁面自動新增一條相應訂購欄*/
     var cart = [];
     var $table = $('table.rwd-table');
+    var cartListCount = 0;
     function addIntoCart () {/*加入購物清單事件*/
         var $this = $(this);
         var temp = null;
@@ -576,18 +579,21 @@
             refreshList('add', temp);
         }
         $('#cart-counter').text(cart.length);
-        $('#cart-counter').css({'color':'#ea2121',
-            'top':'-20px',
-            'opacity':'0',
-            'transition':'0.1s   cubic-bezier(.08,.69,.35,1)',
-            '-webkit-transition':'0.1s   cubic-bezier(.08,.69,.35,1)'});
-        setTimeout(function () {
-            $('#cart-counter').css({'color':'',
-                'top':'',
-                'opacity':'',
-                'transition':'',
-                '-webkit-transition':''});
-        },50);
+        if(cartListCount != cart.length){
+            $('#cart-counter').css({'color':'#ea2121',
+                'top':'-20px',
+                'opacity':'0',
+                'transition':'0.1s   cubic-bezier(.08,.69,.35,1)',
+                '-webkit-transition':'0.1s   cubic-bezier(.08,.69,.35,1)'});
+            setTimeout(function () {
+                $('#cart-counter').css({'color':'',
+                    'top':'',
+                    'opacity':'',
+                    'transition':'',
+                    '-webkit-transition':''});
+            },50);
+            cartListCount = cart.length;
+        }
         toggleClearCartBtn(cart.length);
 
         console.table(cart);
