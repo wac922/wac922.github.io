@@ -32,7 +32,7 @@
                         <div class="remove-list-item">X</div>
                     </div>
                 </div>
-                <button id="clear-cart" class="hidden">清空訂單</button>
+                <button id="clear-cart" class="hidden"><img src="img/trashcan.svg" alt=""></button>
             </div>
         </div>
         <div id="menu-block">
@@ -608,15 +608,14 @@
         if (countValue != 0) {
             $('#clear-cart').removeClass('hidden');
             $('#tiny-cart')
-                .css({'background-color':'#ffffff',
-                    'background-image':'url("img/cart.svg")',
-                    'transition':'1s background-color ease-in-out',
-                    '-webkit-transition':'1s background-color ease-in-out'});
+                .css({'background-image':'url("img/cart.svg")',
+                    'transition':'0.5s ease-in-out',
+                    '-webkit-transition':'0.5s ease-in-out'});
 //            $('#tiny-cart')//動畫在手機上效果不是很好，有點破圖
 //                .css({'animation':'0.3s tinyCartAnimation  forwards ','-webkit-animation':'0.3s tinyCartAnimation  forwards '});
         } else {
             $('#clear-cart').addClass('hidden');
-            $('#tiny-cart').css({'background-color':'','background-image':''});
+            $('#tiny-cart').css({'background-image':''});
 //            $('#tiny-cart').css({'animation':'','-webkit-animation':''});
         }
     }

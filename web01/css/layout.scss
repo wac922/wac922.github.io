@@ -75,7 +75,7 @@ $min-templateHeight: 700px;
                   top,
                 linear-gradient(-45deg, transparent 8.84px, #8b0000 0)
                   bottom;
-    background-size: 100% 50%;
+    background-size: 100% 51%;
     background-repeat: no-repeat;
     font-weight: 600;
     color: #ffffff;
@@ -93,6 +93,7 @@ $min-templateHeight: 700px;
       display: inline-block;
       margin: 2px;
       padding: 0.2em;
+      line-height: 1em;
       //border: 1px solid #666;
       border-radius: 50%;
       width: 1em;
@@ -107,10 +108,37 @@ $min-templateHeight: 700px;
     position: absolute;
     //top:0;
     right:0;
-    width: 5em;
+    padding: 0;
+    width: 25%;
     //height: 0;
-    word-break: keep-all;
+    //word-break: keep-all;
     //border-radius: 0 0 50% 50%;
+    background-color: #594846;
+    //background: linear-gradient(-135deg, transparent 8.84px, #8b0000 0)
+    //top right,
+    // linear-gradient(-225deg, transparent 8.84px, #8b0000 0)
+    //top left,
+    //linear-gradient(-315deg, transparent 8.84px, #8b0000 0)
+    //bottom left,
+    //linear-gradient(-45deg, transparent 8.84px, #8b0000 0)
+    //bottom right;
+    /***************************************************************************/
+    background: radial-gradient(circle at top right, transparent 6px, #594846 0)
+    top right,
+    radial-gradient(circle at top left, transparent 6px, #594846 0)
+    top left,
+    radial-gradient(circle at bottom left, transparent 6px, #594846 0)
+    bottom left,
+    radial-gradient(circle at bottom right, transparent 6px, #594846 0)
+    bottom right;
+    background-size: 60% 60%;
+    background-repeat: no-repeat;
+    //background-image: url("../img/trashcan.svg");
+    img{
+      width: 1.5em;
+      height: auto;
+      vertical-align: middle;
+    }
   }
 }
 //cart end
