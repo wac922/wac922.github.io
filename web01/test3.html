@@ -4,7 +4,24 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
+    <style>
+        .div1{
+            width: 200px;
+            height:200px;
+            background: #58a;
+            background:
+                    linear-gradient(-45deg,transparent 35.36px ,#58a 0)
+                        right,
+                    linear-gradient(45deg,transparent 35.36px ,#655 0)
+                        left;
+            background-size: 50% 100%;
+            background-repeat: no-repeat;
 
+        }
+        .div1::after{
+
+        }
+    </style>
 </head>
 <body>
 <div>
@@ -12,15 +29,7 @@
     <span></span>
 </div>
 <script>
-    var i  =0 ;
-    for(var k = 0 ;k<=10; k++){
 
-        var oDiv =  document.getElementsByClassName('div1')[0];
-     setTimeout(function () {
-         oDiv.innerHTML=i++;
-     },5000)   ;
-
-    }
 </script>
 </body>
 </html>
