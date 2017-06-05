@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="keywords" content="淡粉棠,tanfen,bakery,bread,cake,烘焙,麵包,西點,餅乾,蛋糕">
     <meta name="viewport" content="width=device-width, initial-sacle=1">
-    <title>TanFen</title>
+    <title>淡粉棠</title>
     <link rel="stylesheet" href="css/action.css">
-    <link rel="icon" href="img/favicon-01.png" type="image/png">
+    <link rel="icon" href="img/favicon-02-01.png" type="image/png">
     <!--<link rel="stylesheet" href="css/layout.css">-->
     <style>
         /*layout-css */
@@ -260,7 +260,7 @@
             </div>
             <div class="form-field">
                 <label for="tele">電話:</label>
-                <input name="tele" id="tele" />
+                <input name="tele" id="tele"/>
                 <span class="error hidden">請輸入正確格式電話(請務必填寫區碼)</span>
             </div>
             <div class="form-field">
@@ -373,35 +373,19 @@
     //            $('nav').removeClass('scroll-float');
     //        }
     //    })
-    function hiddenMenu() {
+    /*
+     * changeBlock()  點擊nav時換到各頁函數
+     *
+     * */
+    function hiddenMenu() {//在<670可視區下，移除漢堡選單上的class，以隱藏選單
         var navList = document.getElementsByClassName('nav-list')[0];
-        if (navList.classList.contains('display-toggle')) {
-            navList.classList.remove('display-toggle');
+        if (navList.classList.contains('display-block')) {
+            navList.classList.remove('display-block');
         }
     }
-    function changeBlock() {//換頁函數
-        var marks = $(this).data('marks');
-        var $this = $(this);
-
-        $('.template').addClass('hidden');//先隱藏所有區塊
-        $('.' + marks).removeClass('hidden');//移除需要顯示的hidden類名
-        $(window).scrollTop(0);//回每頁頂部
-
-        var hoverColor = $this.css('background-position');
-        //將所有按鈕顏色恢復
-        $navlistBtn.each(function () {
-            $(this).css('background-position', "");
-        });
-//    console.log(hoverColor);
-        $this.css('background-position', hoverColor);
-
-//        $resetbtn.click();
-        $('.form-field.act').remove();
-            $('#tiny-cart').siblings('#cart-slide-block').slideDown();
-
-        /*若點擊的是填寫訂單頁面，檢查cart並從cart取得儲存的資料*/
-        if ($this.data('marks') === 'order') {
-            for (var i = cart.length - 1 ; i >= 0 ; i--) {
+    function goToOrderPage(obj) {
+        if (obj.data('marks') === 'order') {
+            for (var i = cart.length - 1; i >= 0; i--) {
                 cloneOrder()
                     .find('select')
                     .val(cart[i].alt)
@@ -414,6 +398,26 @@
             }
             $('#tiny-cart').click();//進入訂單則隱藏右上角的購物清單
         }
+    }
+    function changeBlock() {//換頁
+        var marks = $(this).data('marks');
+        var $this = $(this);
+
+        $('.template').addClass('hidden');//先隱藏所有區塊
+        $('.' + marks).removeClass('hidden');//移除需要顯示的hidden類名
+        $(window).scrollTop(0);//回每頁頂部
+
+        var hoverColor = $this.css('background-position');
+        $navlistBtn.each(function () {//將所有按鈕顏色恢復
+            $(this).css('background-position', "");
+        });
+        $this.css('background-position', hoverColor);//給選中的那個nav按鈕圖像換成綠色(圖片精靈)
+
+        $('.form-field.act').remove();
+        $('#tiny-cart').siblings('#cart-slide-block').slideDown();//隱藏購物車
+
+        /*若點擊的是填寫訂單頁面，檢查cart並從cart取得儲存的資料*/
+        goToOrderPage($this);
 //        else if($this.data('marks') === 'products'){
 //            $('#tiny-cart').siblings('#cart-slide-block').slideDown();
 //        }
@@ -450,9 +454,9 @@
 
     hamburgerMenu.addEventListener('click', function (event) {
         var navList = document.getElementsByClassName('nav-list')[0];
-        navList.classList.toggle('display-toggle');
+        navList.classList.toggle('display-block');
     });
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', function () {//可視區寬度大於670px時，
         if (window.innerWidth > 670) {
 //            console.log(window.innerWidth);
             return hiddenMenu();
@@ -514,7 +518,7 @@
     var cart = [];
     var $table = $('table.rwd-table');
     var cartListCount = 0;
-    function addIntoCart () {/*加入購物清單事件*/
+    function addIntoCart() {/*加入購物清單事件*/
         var $this = $(this);
         var temp = null;
         var $thisTr = $this.closest('tr');
@@ -532,7 +536,7 @@
                 }
 //                console.log(temp);
 //            } else if (cart[i].alt === alt && cart[i].count !== count) {//同名不同數量
-            } else if (cart[i].alt === alt ) {//同名，且無論任何數量都需刷新對應數量
+            } else if (cart[i].alt === alt) {//同名，且無論任何數量都需刷新對應數量
 //                cart.splice(i, 1);
 //                refreshList('remove');
                 if (count !== 0) {
@@ -541,7 +545,7 @@
 
                     //改變list清單數量
                     var $countBlock = $('.cart-list-items.act').eq(i).find('.cart-list-count');
-                    var oldCount= parseInt($countBlock.text());
+                    var oldCount = parseInt($countBlock.text());
                     $countBlock.text(oldCount + count);
                     break;
 //                    temp = {'alt': alt, 'count': count, 'name-cn': nameCn};
@@ -570,6 +574,7 @@
                 $cardList.find('.act').eq(i).remove();
             }
         }
+
         if (cart.length === 0 && count !== 0) {
             cart.push({'alt': alt, 'count': count, 'name-cn': nameCn});
             /*每個cart陣列內容物操作都要刷新購物清單(調用refreshList)*/
@@ -579,19 +584,23 @@
             refreshList('add', temp);
         }
         $('#cart-counter').text(cart.length);
-        if(cartListCount != cart.length){
-            $('#cart-counter').css({'color':'#ea2121',
-                'top':'-20px',
-                'opacity':'0',
-                'transition':'0.1s   cubic-bezier(.08,.69,.35,1)',
-                '-webkit-transition':'0.1s   cubic-bezier(.08,.69,.35,1)'});
+        if (cartListCount != cart.length) {
+            $('#cart-counter').css({
+                'color': '#ea2121',
+                'top': '-20px',
+                'opacity': '0',
+                'transition': '0.1s   cubic-bezier(.08,.69,.35,1)',
+                '-webkit-transition': '0.1s   cubic-bezier(.08,.69,.35,1)'
+            });
             setTimeout(function () {
-                $('#cart-counter').css({'color':'',
-                    'top':'',
-                    'opacity':'',
-                    'transition':'',
-                    '-webkit-transition':''});
-            },50);
+                $('#cart-counter').css({
+                    'color': '',
+                    'top': '',
+                    'opacity': '',
+                    'transition': '',
+                    '-webkit-transition': ''
+                });
+            }, 50);
             cartListCount = cart.length;
         }
         toggleClearCartBtn(cart.length);
@@ -602,26 +611,29 @@
     }
 
 
-    $table.on('click', 'button.add-into-cart',addIntoCart);/**/
+    $table.on('click', 'button.add-into-cart', addIntoCart);
+    /**/
 
-    function toggleClearCartBtn(countValue) {
+    function toggleClearCartBtn(countValue) {//從購物車陣列裡獲得陣列長度，若等於0，則隱藏購物車麵包圖樣，並隱藏清空購物車按鈕
         if (countValue != 0) {
             $('#clear-cart').removeClass('hidden');
             $('#tiny-cart')
-                .css({'background-image':'url("img/cart.svg")',
-                    'transition':'0.5s ease-in-out',
-                    '-webkit-transition':'0.5s ease-in-out'});
+                .css({
+                    'background-image': 'url("img/cart.svg")',
+                    'transition': '0.5s ease-in-out',
+                    '-webkit-transition': '0.5s ease-in-out'
+                });
 //            $('#tiny-cart')//動畫在手機上效果不是很好，有點破圖
 //                .css({'animation':'0.3s tinyCartAnimation  forwards ','-webkit-animation':'0.3s tinyCartAnimation  forwards '});
         } else {
             $('#clear-cart').addClass('hidden');
-            $('#tiny-cart').css({'background-image':''});
+            $('#tiny-cart').css({'background-image': ''});
 //            $('#tiny-cart').css({'animation':'','-webkit-animation':''});
         }
     }
-//    setInterval(function () {
-//        console.table(cart);
-//    }, 3000);
+    //    setInterval(function () {
+    //        console.table(cart);
+    //    }, 3000);
 
 
     $('#clear-cart').click(function () {/*清除購物車事件*/
@@ -667,15 +679,16 @@
         //此處同級最前面有一個hidden的物件，所以返回的數字都會是+1。
         var $thisParent = $this.closest('.act');
         var getIndex = $thisParent.index();
-        console.log('listindex:'+getIndex);
-            //cart陣列裡也必須連動，又，因cart陣列裡順序與清單順序相同，故找出同索引的元素剔除即可
+        console.log('listindex:' + getIndex);
+        //cart陣列裡也必須連動，又，因cart陣列裡順序與清單順序相同，故找出同索引的元素剔除即可
         cart.splice(getIndex - 1, 1);//連動刪除cart陣列裡的物件
         $('#cart-counter').text(cart.length);//刷新清單筆數
         console.log($this.attr('class'));
         /*判斷一把，看調用這個函數的是order訂單，還是list清單*/
 //        if($this.attr('class') === 'remove-list-item'){
-            $thisParent.remove();//砍掉清單內資料
-            $('.form-field.act').eq(getIndex-1).remove();/*連動將order上的商品項刪除*/
+        $thisParent.remove();//砍掉清單內資料
+        $('.form-field.act').eq(getIndex - 1).remove();
+        /*連動將order上的商品項刪除*/
 //        }else if($this.attr('class') === 'field-remover'){
 //            $('.cart-list-items.act').eq(getIndex-1).remove();
         countTotal();
@@ -699,12 +712,13 @@
 //        console.log(typeof thisValue);
         var reg = /^\d+$/;
         $(this).siblings('.error').addClass('hidden');
-        if(!reg.test(thisValue)){
+        if (!reg.test(thisValue)) {
             $(this).val(0);
             $(this).siblings('.error').removeClass('hidden');
         }
     }
-    $table.on('blur','.products-counter',validNumber);/*產品介紹表格裡數量欄位驗證事件*/
+    $table.on('blur', '.products-counter', validNumber);
+    /*產品介紹表格裡數量欄位驗證事件*/
 
     /*驗證手機*/
     function validTele() {
@@ -712,21 +726,21 @@
         var getTele = $this.val();
 //        console.log(this.id);
         /*0900 000 000*/
-        var reg=null;
-        if(this.id === 'mobile-tele'){
-         reg = /^09\d{2}[-\s]?\d{3}[-\s]?\d{3}$/;
-        }else if(this.id === 'tele'){
+        var reg = null;
+        if (this.id === 'mobile-tele') {
+            reg = /^09\d{2}[-\s]?\d{3}[-\s]?\d{3}$/;
+        } else if (this.id === 'tele') {
             /*049-2712950  (04)2712345  02 2123456*/
-         reg = /^\(?\d{2,3}[)\s-]?\d{6,7}$/;
+            reg = /^\(?\d{2,3}[)\s-]?\d{6,7}$/;
         }
 //        var reg = /0988305049/;
         $this.siblings('.error').addClass('hidden');
-        if(!reg.test(getTele)){
+        if (!reg.test(getTele)) {
             $this.siblings('.error').removeClass('hidden');
         }
     }
-    $('#mobile-tele').on('blur',validTele);
-    $('#tele').on('blur',validTele);
+    $('#mobile-tele').on('blur', validTele);
+    $('#tele').on('blur', validTele);
 
     /*驗證郵箱*/
     function validMail() {

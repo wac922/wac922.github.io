@@ -93,7 +93,7 @@ h2 {
 .hidden {
   display: none; }
 
-.display-toggle {
+.display-block {
   display: block !important; }
 
 .hamburger-menu {
@@ -220,18 +220,18 @@ button {
       cursor: pointer; }
   #cart-container button {
     position: absolute;
-    right: 0;
+    right: 5px;
     padding: 0;
-    width: 25%;
+    height: 3rem;
     background-color: #594846;
+    background: linear-gradient(-35deg, rgba(0, 0, 0, 0) 15px, #594846 0%) bottom left, linear-gradient(35deg, rgba(0, 0, 0, 0) 15px, #594846 0%) bottom right;
     /***************************************************************************/
-    background: radial-gradient(circle at top right, rgba(0, 0, 0, 0) 6px, #594846 0%) top right, radial-gradient(circle at top left, rgba(0, 0, 0, 0) 6px, #594846 0%) top left, radial-gradient(circle at bottom left, rgba(0, 0, 0, 0) 6px, #594846 0%) bottom left, radial-gradient(circle at bottom right, rgba(0, 0, 0, 0) 6px, #594846 0%) bottom right;
-    background-size: 60% 60%;
+    background-size: 60% 100%;
     background-repeat: no-repeat; }
     #cart-container button img {
       width: 1.5em;
       height: auto;
-      vertical-align: middle; }
+      padding-bottom: 50%; }
 
 nav {
   width: 100%;
@@ -360,7 +360,8 @@ section {
       color: rgba(255, 255, 255, 0.8);
       border-radius: 25px;
       display: inline-block;
-      margin: 20px 10px; }
+      margin: 20px 10px;
+      cursor: pointer; }
       section .card-list .card img {
         width: 100%;
         -webkit-border-radius: 10px;
@@ -425,12 +426,14 @@ section::before {
   z-index: 1;
   -webkit-transform: rotateY(0deg);
   -ms-transform: rotateY(0deg);
-  transform: rotateY(0deg); }
+  transform: rotateY(0deg);
+  box-shadow: 3px 5px 20px 0px #3a3a3a; }
 
 .back {
   -webkit-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
-  transform: rotateY(-180deg); }
+  transform: rotateY(-180deg);
+  box-shadow: 0px 0px 0px 0px transparent; }
   .back p {
     margin: auto;
     padding: 1em; }
@@ -583,7 +586,7 @@ footer {
   text-align: center;
   padding: 5px;
   box-sizing: border-box;
-  box-shadow: -1px -3px 20px 0px #594846; }
+  box-shadow: 1px 1px 7px 0px #594846; }
 
 @media screen and (max-width: 670px) {
   body {
@@ -698,13 +701,15 @@ footer {
   .card:hover .front, .front-flip {
     -webkit-transform: rotateY(180deg);
     -ms-transform: rotateY(180deg);
-    transform: rotateY(180deg); }
+    transform: rotateY(180deg);
+    box-shadow: 0px 0px 0px 0px transparent; }
 
   .card:hover .back, .back-flip {
     -webkit-transform: rotateY(0deg);
     -ms-transform: rotateY(0deg);
     transform: rotateY(0deg);
-    z-index: 1\0; } }
+    z-index: 1\0;
+    box-shadow: 3px 5px 20px 0px #3a3a3a; } }
 body {
   color: #846932; }
 

@@ -107,37 +107,41 @@ $min-templateHeight: 700px;
   button{
     position: absolute;
     //top:0;
-    right:0;
+    right:5px;
     padding: 0;
-    width: 25%;
+    //width: 20%;
+    height: 3rem;
+    //border-right:5px solid transparent ;
     //height: 0;
     //word-break: keep-all;
     //border-radius: 0 0 50% 50%;
     background-color: #594846;
-    //background: linear-gradient(-135deg, transparent 8.84px, #8b0000 0)
+    background:
+    //        linear-gradient(-135deg, transparent 8.84px, #8b0000 0)
     //top right,
     // linear-gradient(-225deg, transparent 8.84px, #8b0000 0)
     //top left,
-    //linear-gradient(-315deg, transparent 8.84px, #8b0000 0)
-    //bottom left,
-    //linear-gradient(-45deg, transparent 8.84px, #8b0000 0)
-    //bottom right;
-    /***************************************************************************/
-    background: radial-gradient(circle at top right, transparent 6px, #594846 0)
-    top right,
-    radial-gradient(circle at top left, transparent 6px, #594846 0)
-    top left,
-    radial-gradient(circle at bottom left, transparent 6px, #594846 0)
+    linear-gradient(-35deg, transparent 15px, #594846 0)
     bottom left,
-    radial-gradient(circle at bottom right, transparent 6px, #594846 0)
+    linear-gradient(35deg, transparent 15px, #594846 0)
     bottom right;
-    background-size: 60% 60%;
+    /***************************************************************************/
+    //background: radial-gradient(circle at top right, transparent 6px, #594846 0)
+    //top right,
+    //radial-gradient(circle at top left, transparent 6px, #594846 0)
+    //top left,
+    //radial-gradient(circle at bottom left, transparent 6px, #594846 0)
+    //bottom left,
+    //radial-gradient(circle at bottom right, transparent 6px, #594846 0)
+    //bottom right;
+    background-size: 60% 100%;
     background-repeat: no-repeat;
     //background-image: url("../img/trashcan.svg");
     img{
       width: 1.5em;
       height: auto;
-      vertical-align: middle;
+      padding-bottom: 50%;
+      //vertical-align: middle;
     }
   }
 }
@@ -347,6 +351,7 @@ section {
       border-radius: 25px;
       display: inline-block;
       margin: 20px 10px;
+      cursor: pointer;
       //border: 2px solid red;
       img {
         width: 100%;
@@ -436,6 +441,7 @@ section::before {
   -webkit-transform: rotateY(0deg);
   -ms-transform: rotateY(0deg);
   transform: rotateY(0deg);
+  box-shadow: 3px 5px 20px 0px #3a3a3a;
 }
 
 .back {
@@ -443,6 +449,7 @@ section::before {
   -webkit-transform: rotateY(-180deg);
   -ms-transform: rotateY(-180deg);
   transform: rotateY(-180deg);
+  box-shadow: 0px 0px 0px 0px transparent;
   p {
     margin: auto;
     padding: 1em;
@@ -705,7 +712,7 @@ footer {
   padding: 5px;
   box-sizing: border-box;
   //border-top: 1px solid #666;
-  box-shadow: -1px -3px 20px 0px #594846;
+  box-shadow: 1px 1px 7px 0px #594846;
 }
 
 //******************************************************************670

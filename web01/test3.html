@@ -2,34 +2,103 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>123</title>
 
     <style>
-        .div1{
-            width: 200px;
-            height:200px;
-            background: #58a;
-            background:
-                    linear-gradient(-45deg,transparent 35.36px ,#58a 0)
-                        right,
-                    linear-gradient(45deg,transparent 35.36px ,#655 0)
-                        left;
-            background-size: 50% 100%;
-            background-repeat: no-repeat;
-
+        .page {
+            /*width: 100px;*/
+            height: 100px;
         }
-        .div1::after{
 
+        .div2 {
+            background-color: #ffc3db;
+            display: none;
         }
+
+        .div3 {
+            background-color: #96ffaa;
+            display: none;
+        }
+
     </style>
 </head>
 <body>
-<div>
-    <div class="div1">0</div>
-    <span></span>
+<div id="outter">
+    <div class="page div1">
+        第一頁
+        <a href="javascript:;">
+            下一頁
+        </a>
+    </div>
+    <div class="page div2">
+        第二頁
+        <a href="javascript:;">
+            下一頁
+        </a>
+    </div>
+    <div class="page div3">
+        第三頁
+        <a href=""></a>
+    </div>
 </div>
 <script>
+    history.replaceState({foo: 'bar0'}, '第一步');
+    var currentState = history.state;
+    console.log(currentState);
+        var currentStateIndex = currentState.foo.match(/\d+/)[0];
+        console.log(currentStateIndex);
+    //    var oDiv1 = document.getElementById('div1');
+    //    var oDiv2 = document.getElementById('div2');
+    //    var oDiv3 = document.getElementById('div3');
+    var aPage = document.getElementsByClassName('page');
+    var oOutter = document.getElementById('outter');
+        clearBlock();
+    //    //        var sDiv =
+        aPage[currentStateIndex].style.display = 'block';
+    //        history.pushState({step:0},'第0步','/step/0');
+    function clearBlock() {
+        for (var i = 0; i < aPage.length; i++) {
+            aPage[i].style.display = 'none';
+        }
+        var currentState = history.state;
+        console.log(currentState);
 
+    }
+    var j = 1;
+    for (var i = 0; i < aPage.length; i++) {
+        aPage[i].getElementsByTagName('a')[0].addEventListener('click', function () {
+            var stateObj = {foo: "bar" + j};
+            history.pushState(stateObj, '第' + j + '步', '/web01/test3.html?'+j);
+            clearBlock();
+            console.log(j);
+            aPage[j].style.display = 'block';
+            j++;
+        });
+    }
+
+
+    window.onpopstate = function (event) {
+        console.log('callOnpopstate');
+        var tab = event.state.foo;
+        console.log(tab.match(/\d+/)[0]);
+        var i = tab.match(/\d+/)[0];
+        j = parseInt(i) + 1;//岸上一頁或下一頁時會把stack裡的東西推出來
+        clearBlock();
+//        var sDiv =
+        aPage[i].style.display = 'block';
+//        oDiv1.style.display = 'block';
+//            switch (tab.match(/\d+/)[0]) {
+//                case 'bar0':
+//                    oDiv1.style.display = 'block';
+//                    break;
+//                case 'bar1':
+//                    oDiv2.style.display = 'block';
+//                    break;
+//                case 'bar2':
+//                    oDiv3.style.display = 'block';
+//                    break;
+//            }
+    }
 </script>
 </body>
 </html>

@@ -35,17 +35,21 @@ function countTotal() {/*計算總計函數*/
     countTotalPrice();
 }
 
-function removeOrder() {/*清除該欄函數*/
+function removeOrder() {//在order頁面點擊灰色X按鈕，清除該欄
     var $this = $(this);
     var $thisParent = $this.closest('.act');
     var getOrderIndex = $thisParent.index();
-    $this.closest('.form-field').remove();
+    /*獲取事件target該欄在兄弟元素間的位置，因最前面有個用來複製欄位，隱藏的.form-field.hidden欄位
+    因此取得的index比陣列多1，故後面陣列應用時需-1*/
+    $this.closest('.form-field').remove();//移除自身整欄
     console.log(getOrderIndex);
-    $('.cart-list-items.act').eq(getOrderIndex-1).remove();//刪除清單上對應商品
-    cart.splice(getOrderIndex-1,1);//刪除購物車陣列裡相對應項目
-    $('#cart-counter').text(cart.length);
+    $('.cart-list-items.act').eq(getOrderIndex-1).remove();//移除購物車上對應商品
+    cart.splice(getOrderIndex-1,1);//移除購物車陣列裡相對應項目
+    $('#cart-counter').text(cart.length);//更新購物車裡的數量
     countTotal();
     console.table(cart);
+
+    toggleClearCartBtn(cart.length);
 }
 
 function countTotalPrice() {/*計算應付金額函數*/
