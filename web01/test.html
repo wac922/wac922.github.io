@@ -5,119 +5,43 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        .outer{
-            perspective: 1000px;
-            transform-style: preserve-3d;
-        }
-        .outer:hover .front{
-            transform: rotateY(180deg);
-        }
-        .outer:hover .back{
-            transform: rotateY(0deg);
-        }
-        .outer,.front,.back{
-            width: 200px;
-            height: 300px;
-            /*border: 2px solid black;*/
-            /*text-align: center;*/
-        }
-        .inner{
-            transition: 0.6s;
-            transform-style: preserve-3d;
-            position: relative;
-            /*border: 1px solid red;*/
-        }
-        .front,.back{
-            backface-visibility: hidden;
-            transition: 0.6s;
-            transform-style: preserve-3d;
-            position: absolute;
-            left: 0;
-            top:0;
-        }
-        /*.outer:hover .inner{*/
-            /*transform: rotateY(180deg);*/
+        div{
+            width: 100px;
+            height: 100px;
+            border: solid blue;
 
-        /*}*/
-        .front{
-            background-color: aqua;
-            z-index: 2;
-            transform: rotateY(0deg);
         }
-        .back{
-            background-color: #594846;
-            transform: rotateY(-180deg);
-        }
-        body{
-            height: 2000px;
-        }
-        *{
-            margin: 0;
-            padding:0;
-        }
-        #header{
+        .div0{
             width: 100%;
-            height:50px;
-            background-color: blueviolet;
-            position: absolute;
-            top:0;
-            z-index: 2;
         }
-        #p1{
-            /*width: 200px;*/
-            /*height: 200px;*/
-            position: relative;
-            background-color: #ffa4cc;
-            content: '';
+        .div1{
+            /*display: none;*/
+            /*visibility: collapse;*/
+            float: left;
         }
-        #p1:before{
-            position: absolute;
-            top:0;left: 0;bottom: 0;
-            right:0;
-            background-color: #4147ff;
+
+        .div2{
+            border-color: #ffa4cc;
+        }
+        .clearfix{
+            content: ' ';
+            clear: both;
+            /*display: block;*/
+            border-color: #44ff85;
+            overflow: auto;
+        }
+        table{
+            /*visibility: collapse;*/
+            border: solid red;
         }
     </style>
 </head>
 <body>
-<!--<div id="header">123</div>-->
-<div class="outer">
-    <div class="inner">
-        <div class="front">
-            正面
-        </div>
-        <div class="back">
-            背面
-        </div>
-    </div>
-</div>
 
-<ul class="level-1">
-    <li class="item-i">I</li>
-    <li class="item-ii">II
-        <ul class="level-2">
-            <li class="item-a">A</li>
-            <li class="item-b">B
-                <ul class="level-3">
-                    <li class="item-1">1</li>
-                    <li class="item-2">2</li>
-                    <li class="item-3">3</li>
-                </ul>
-            </li>
-            <li class="item-c">C</li>
-        </ul>
-    </li>
-    <li class="item-iii">III</li>
-</ul>
-<div class="oDiv" style="background-color: blueviolet">aaa
-
-<a href="https://tw.yahoo.com/" target="_blank">aaaaa</a>
-</div>
-<input type="text" id="abc" value="tom">
-<button id="btn">click me</button>
-<p id="p1"></p>
-
-
-
+<div class="div0">0</div>
+<div class="div1">1</div>
+<div class="div1">1</div>
+<div class="div2 clearfix">2</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script>
     $( "ul.level-2" ).children().css( "background-color", "red" ).css('margin-top','10px');
@@ -139,7 +63,7 @@ window.addEventListener('scroll',onscroll,false);
 
 $('.oDiv').on('click','a',function () {
     console.log('div11111');
-})
+});
 
 
 
@@ -151,7 +75,7 @@ var oInput = document.getElementById('abc');
     console.log(oInput.value);
 //    oInput.value = '123';
     p1.innerText = oInput.value;
-})
+});
 alert(window.innerWidth);
 </script>
 </body>

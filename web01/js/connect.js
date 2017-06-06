@@ -47,7 +47,7 @@ function removeOrder() {//在order頁面點擊灰色X按鈕，清除該欄
     cart.splice(getOrderIndex-1,1);//移除購物車陣列裡相對應項目
     $('#cart-counter').text(cart.length);//更新購物車裡的數量
     countTotal();
-    console.table(cart);
+    // console.table(cart);
 
     toggleClearCartBtn(cart.length);
 }
@@ -114,7 +114,7 @@ $('.quantity').blur(function () {
         .eq(getOrderIndex-1)
         .find('.cart-list-count')
         .text(customCount);
-    console.table(cart);
+    // console.table(cart);
 });
 
 $goodsSelected.change(function () {/*品名選擇變化事件，清空之前的數量及小計*/
@@ -137,7 +137,7 @@ $resetbtn.click(function (event) {/*重置鍵，移除所有訂購項*/
     // cart.length = 0;
     // $('.cart-list-items.act').remove();
     // $('#add-goods').click();
-    console.table(cart);
+    // console.table(cart);
     toggleClearCartBtn(cart.length);
     countTotal();
 });

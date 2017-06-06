@@ -4,32 +4,75 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
+        *{
+            border:1px solid black;
+        }
+        html{
+            /*border:8px solid yellow;*/
+            /*width: 500px;*/
+            /*height: 300px;*/
+        }
         body{
-            margin: 0;
+            /*display: block;*/
+            width: 500px;
+            height: 500px;
+            position: relative;
+            top:50%;
+            left:50%;
+            transform: translate(-50% ,-50%);
+            /*background-color: #ffa4cc;*/
+            /*border:5px solid blue;*/
         }
-        .div1 {
-            width: 100%;
-            background-color: #ffa4cc;
+        .outer{
+            position: relative;
+            background-color: #96ffaa;
         }
-
-        .div2, .div3 {
-            width: 50%;
-            background-color: #4147ff;
-            border:2px solid yellowgreen;
-            box-sizing: border-box;
+        span{
+            position: relative;
+            /*border: 2px solid yellowgreen;*/
+            padding: 50px;
         }
-        div{
-            height: 50vh;
-float: left;
+        .inner{
+            border: 2px solid red;
+            outline: 30px solid blue;
+            position: absolute;
+            left: 50px;
+            top:50px;
+        }
+        .myDiv{
+            /*width: 200px;*/
+            /*height:200px;*/
+            /*background-color: #ffa4cc;*/
+            /*border:2px solid red;*/
         }
     </style>
 </head>
 <body>
-<div class="div1"></div>
-<div class="div2"></div>
-<div class="div3"></div>
-<script>
+<div class="outer">
+    <span>
 
+    <div class="myDiv inner">1 Lorem ipsum dolor sit amet, consectetur adipisicing elit. A aspernatur consectetur distinctio doloremque eligendi eum facere illo, inventore magnam nihil officiis perferendis perspiciatis quae quia quod recusandae sequi similique ullam.</div>
+    </span>
+    <span>123span</span>
+    <div class="myDiv inner">2 nihil sequi tempora voluptates. Deserunt eligendi fugit impedit laboriosam libereprehenderit.</div>
+    <div class="myDiv">3 uscipit velit! Doloribus dolorum eaque esse expedita nisi optio pariatur quod sit suscipit?</div>
+</div>
+<script>
+    function myFunc(name) {
+        console.log('myFunc'+' '+this+' '+name);
+    }
+    myFunc.prototype.func2 = function () {
+        console.log('func2');
+    };
+
+//    var foo = new myFunc();
+//myFunc.call('this is this','tom');
+   var num = '11111110';
+   var num1 = ~num;
+   var newNum =Math.floor(-5.5);
+//    var newNum = num.toString(10);
+ console.log(newNum);
+ console.log(num1);
 </script>
 </body>
 </html>

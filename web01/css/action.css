@@ -197,7 +197,7 @@ button {
     cursor: pointer;
     background-color: #8b0000;
     background: linear-gradient(-135deg, rgba(0, 0, 0, 0) 8.84px, #8b0000 0%) top, linear-gradient(-45deg, rgba(0, 0, 0, 0) 8.84px, #8b0000 0%) bottom;
-    background-size: 100% 51%;
+    background-size: 100% 52%;
     background-repeat: no-repeat;
     font-weight: 600;
     color: #ffffff; }
