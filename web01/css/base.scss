@@ -11,17 +11,22 @@ a{
   text-decoration: none;
 }
 h1{
-  color: #594846;
-  font-size: 1.5em;
+  color: #fff;
+  font-size: 2.5em;
   font-weight: 600;
   padding: 0 0.25em;
   //border: 1px solid red;
   min-width: 3em;
+  word-break: keep-all;
 }
 h2{
-  font-size: 1.5rem;
+  font-size: 1.5em;
   font-weight: 600;
-  padding: 0 0.25em;
+  //padding: 0.5em 0.25em;
+  line-height: 2.5em;
+}
+h3{
+  font-size: 1em;
 }
 .banner > p{
   color: #ffffff;

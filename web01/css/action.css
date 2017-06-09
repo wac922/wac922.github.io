@@ -58,16 +58,20 @@ a {
   text-decoration: none; }
 
 h1 {
-  color: #594846;
-  font-size: 1.5em;
+  color: #fff;
+  font-size: 2.5em;
   font-weight: 600;
   padding: 0 0.25em;
-  min-width: 3em; }
+  min-width: 3em;
+  word-break: keep-all; }
 
 h2 {
-  font-size: 1.5rem;
+  font-size: 1.5em;
   font-weight: 600;
-  padding: 0 0.25em; }
+  line-height: 2.5em; }
+
+h3 {
+  font-size: 1em; }
 
 .banner > p, .banner-home > p {
   color: #ffffff;
@@ -253,6 +257,9 @@ nav {
         height: 30px;
         min-width: 136px;
         padding: 0.25em; }
+      nav .wrapper .logo h1 {
+        color: #594846;
+        font-size: 1.5rem; }
 
 #menu-block #menu-toggle {
   width: 50px;
@@ -307,22 +314,19 @@ nav {
     background: -webkit-linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7));
     background: -o-linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7));
     background: -moz-linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7));
-    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.7));
+    background: linear-gradient(rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.7));
     position: absolute;
     bottom: 0px;
     left: 0px;
-    flex-direction: column;
-    box-shadow: 0px 10px 20px 0px #594846; }
-    .banner .blur-banner p, .banner-home .blur-banner p {
-      margin: 8px auto;
-      text-align: center; }
-      .banner .blur-banner p:first-child, .banner-home .blur-banner p:first-child {
-        margin-top: 50px; }
-      .banner .blur-banner p:last-child, .banner-home .blur-banner p:last-child {
-        font-size: 2em; }
-        .banner .blur-banner p:last-child span, .banner-home .blur-banner p:last-child span {
-          word-break: keep-all;
-          padding: 0 0.5em; }
+    box-shadow: 0px 10px 20px 0px #594846;
+    text-align: center; }
+    .banner .blur-banner .b-b-title, .banner-home .blur-banner .b-b-title {
+      color: #fff;
+      float: left;
+      width: 100%;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%); }
 
 .banner-home {
   background: url("../img/banner2_ok.jpg") no-repeat;

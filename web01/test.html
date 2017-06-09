@@ -5,84 +5,68 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        div{
+        .outer {
+            border: 1px solid red;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #96ffaa;
+            /*overflow: auto;*/
+            /*zoom: 1;*/
+            /*float: left;*/
+        }
+
+        .div1 {
             width: 100px;
             height: 100px;
+            background-color: #ffa4cc;
             border: solid blue;
-
-        }
-        .div0{
-            width: 100%;
-        }
-        .div1{
-            /*display: none;*/
-            /*visibility: collapse;*/
             float: left;
+            margin: 5px;
         }
 
-        .div2{
-            border-color: #ffa4cc;
-        }
-        .clearfix{
+        .clearfix::after {
             content: ' ';
+            height: auto;
+            /*width: 100px;*/
+            display: block;
+            /*visibility: hidden;*/
+            background-color: #846930;
+        }
+
+        .clearfix::before {
+        }
+
+        .clearfix::after {
             clear: both;
-            /*display: block;*/
-            border-color: #44ff85;
-            overflow: auto;
         }
-        table{
-            /*visibility: collapse;*/
-            border: solid red;
-        }
-        .triangle{
-            width: 0;
-            height: 0;
-            border: 200px solid;
-            border-color: transparent transparent red transparent;
+
+        .clearfix {
+            zoom: 1;
+
         }
     </style>
 </head>
 <body>
-<div class="triangle"></div>
-<div class="div0">0</div>
-<div class="div1">1</div>
-<div class="div1">1</div>
-<div class="div2 clearfix">2</div>
+<div class="outer clearfix">
+    <div class="div1"></div>
+    <div class="div1"></div>
+    <div class="div1"></div>
+    <!--<div class="clearfix"></div>-->
+</div>
 <script src="js/jquery-1.11.3.min.js"></script>
 <script>
-    $( "ul.level-2" ).children().css( "background-color", "red" ).css('margin-top','10px');
-    var ticking = false;
-function onscroll() {
-    if (!ticking){
-        requestAnimationFrame(realFunc);
-        ticking = true;
+    var arr = [1, 2, 3, 4, 5, 6];
+    function randomSort(arr) {
+        for (var i = 0; i < arr.length; i++) {
+            var r = parseInt(Math.random() * arr.length);
+            var temp = arr[r];
+            arr[r] = arr[i];
+            arr[i] = temp;
+        }
+        return arr;
     }
-}
-function realFunc() {
-    console.log('Success');
-    ticking = false;
-    var scrollTop = $(window).scrollTop();
-    $('#header').css('top',scrollTop);
-}
+    console.log(randomSort(arr));
 
-window.addEventListener('scroll',onscroll,false);
-
-$('.oDiv').on('click','a',function () {
-    console.log('div11111');
-});
-
-
-
-var btn = document.getElementById('btn');
-var p1 = document.getElementById('p1');
-
-btn.addEventListener('click',function () {
-var oInput = document.getElementById('abc');
-    console.log(oInput.value);
-//    oInput.value = '123';
-    p1.innerText = oInput.value;
-});
-alert(window.innerWidth);
 </script>
 </body>
 </html>
