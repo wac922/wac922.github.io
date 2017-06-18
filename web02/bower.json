@@ -1,0 +1,22 @@
+{
+  "name": "web02",
+  "authors": [
+    "RyanChen <wac922@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery-validation": "^1.16.0",
+	"bootstrap":"",
+	"turn":""
+  }
+}

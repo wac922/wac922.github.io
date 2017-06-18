@@ -1,0 +1,106 @@
+.nav.navbar.navbar-default {
+  margin-bottom: 0; }
+
+.wac-poi-r {
+  position: relative; }
+
+.container.wac-set-middle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.banner {
+  min-height: 700px;
+  height: 100vh;
+  background-color: #aaa;
+  margin-top: 0; }
+  .banner::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle; }
+
+.banner .btn span {
+  font-size: 3rem;
+  display: block;
+  width: 50px;
+  height: 50px;
+  line-height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  color: #666666;
+  border: 1px solid #666666; }
+
+.about {
+  min-height: 420px; }
+  .about::before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle; }
+
+.numbers {
+  background-color: #1d1e1f;
+  min-height: 200px;
+  color: white;
+  position: relative; }
+  .numbers::before {
+    height: 100%;
+    content: '';
+    display: inline-block;
+    vertical-align: middle; }
+
+.best-projects {
+  min-height: 600px; }
+
+.carousel-inner {
+  min-height: 400px; }
+
+.carousel-inner .carousel-item {
+  min-height: 500px;
+  background-color: #212121; }
+
+.client {
+  min-height: 300px; }
+  .client::before {
+    height: 100%;
+    width: 0;
+    content: '';
+    display: inline-block;
+    vertical-align: middle; }
+
+.latest-blog {
+  background-color: #eee;
+  min-height: 800px; }
+
+* {
+  box-sizing: border-box; }
+
+body {
+  font-family: sans-serif; }
+
+/* ---- grid ---- */
+.grid {
+  background: #DDD;
+  max-width: 1200px; }
+
+/* clear fix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both; }
+
+/* ---- .grid-item ---- */
+.grid-item {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background: #0D8;
+  border: 2px solid #333;
+  border-color: rgba(0, 0, 0, 0.7); }
+
+.grid-item--width2 {
+  width: 200px; }
+
+/*# sourceMappingURL=myStyle.css.map */

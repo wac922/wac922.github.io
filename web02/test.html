@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #magazine {
+            width: 800px;
+            height: 400px;
+        }
+.hard{
+    /*background-color: #00b3ee;*/
+}
+        .page {
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+<div id="flipbook">
+    <div class="hard"> Turn.js </div>
+    <div class="hard">back???</div>
+    <div class="page">
+    
+    </div>
+    <div class="page"> Page 2 </div>
+    <div class="page"> Page 3 </div>
+    <div class="page"> Page 4 </div>
+    <div class="hard"></div>
+    <div class="hard"></div>
+</div>
+
+<script src="bower_components\jquery\dist\jquery.js"></script>
+<!--<script src="bower_components/turnjs4/lib/hash.js"></script>-->
+<!--<script src="bower_components/turnjs4/lib/scissor.js"></script>-->
+<!--<script src="bower_components/turnjs4/lib/turn.html4.js"></script>-->
+<script src="bower_components/turnjs4/lib/turn.js"></script>
+<!--<script src="bower_components/turnjs4/lib/zoom.js"></script>-->
+<script>
+    $("#flipbook").turn({
+        width: 800,
+        height: 500,
+        autoCenter: false
+    });
+    element = $("<div />").html("Loading...");
+    $("#flipbook").turn("addPage", element, 10);
+
+</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+{
+  "name": "turn",
+  "version": "0.0.0",
+  "authors": [
+    "switer <guankaishe@gmail.com>"
+  ],
+  "description": "Simple url route base on hashchange event",
+  "main": "router.js",
+  "keywords": [
+    "hashchange",
+    "hash",
+    "route",
+    "router",
+    "url"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "turn",
+  "authors": [
+    "switer <guankaishe@gmail.com>"
+  ],
+  "description": "Simple url route base on hashchange event",
+  "main": "router.js",
+  "keywords": [
+    "hashchange",
+    "hash",
+    "route",
+    "router",
+    "url"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "homepage": "https://github.com/switer/turn.js",
+  "_release": "d34ebdca12",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "d34ebdca12ad282a5a5f9f0c49d2e350c4e329e7"
+  },
+  "_source": "https://github.com/switer/turn.js.git",
+  "_target": "*",
+  "_originalSource": "turn"
+}
